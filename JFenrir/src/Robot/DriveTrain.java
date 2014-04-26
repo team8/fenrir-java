@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Runs the drivetrain
+ * @author Paly Robotics
  */
 public class DriveTrain {
     

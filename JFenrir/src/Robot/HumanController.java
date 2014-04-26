@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Human controller
+ * @author Paly Robotics
  */
 public class HumanController {
     

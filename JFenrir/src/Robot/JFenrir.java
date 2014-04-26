@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Main method?
+ * @author Paly Robotics
  */
 public class JFenrir {
     

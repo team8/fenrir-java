@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Controls autonomous
+ * @author Paly Robotics
  */
 public class AutonomousController {
     

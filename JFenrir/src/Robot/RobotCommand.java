@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Runs commands to the robot
+ * @author Paly Robotics
  */
 public class RobotCommand {
     

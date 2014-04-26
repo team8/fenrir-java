@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Has the constants
+ * @author Paly Robotics
  */
 public class Constants {
     

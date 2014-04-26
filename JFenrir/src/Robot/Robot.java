@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Runs the robot
+ * @author Paly Robotics
  */
 public class Robot {
     

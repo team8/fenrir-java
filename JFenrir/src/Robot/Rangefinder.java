@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Runs the rangefinder
+ * @author Paly Robotics
  */
 public class Rangefinder {
     

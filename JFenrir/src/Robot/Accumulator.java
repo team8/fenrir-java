@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Runs the accumulator
+ * @author Paly Robotics
  */
 public class Accumulator {
     

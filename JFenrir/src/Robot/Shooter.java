@@ -7,6 +7,7 @@ package Robot;
 
 /**
  * Runs the shooter
+ * @author Paly Robotics
  */
 public class Shooter {
     

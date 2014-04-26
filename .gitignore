@@ -19,3 +19,4 @@ dist/
 nbdist/
 nbactions.xml
 nb-configuration.xml
+/JavaApplication1/nbproject/private/

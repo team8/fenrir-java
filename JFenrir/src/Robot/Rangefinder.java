@@ -6,7 +6,7 @@
 package Robot;
 
 /**
- *
+ * Runs the rangefinder
  */
 public class Rangefinder {
     

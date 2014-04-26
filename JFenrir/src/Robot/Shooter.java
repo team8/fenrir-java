@@ -6,7 +6,7 @@
 package Robot;
 
 /**
- *
+ * Runs the shooter
  */
 public class Shooter {
     

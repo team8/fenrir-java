@@ -6,7 +6,7 @@
 package Robot;
 
 /**
- *
+ * Human controller
  */
 public class HumanController {
     

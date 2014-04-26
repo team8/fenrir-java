@@ -6,7 +6,7 @@
 package Robot;
 
 /**
- *
+ * Controls autonomous
  */
 public class AutonomousController {
     

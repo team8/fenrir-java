@@ -6,7 +6,7 @@
 package Robot;
 
 /**
- *
+ * Runs the robot
  */
 public class Robot {
     

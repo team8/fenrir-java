@@ -6,7 +6,7 @@
 package Robot;
 
 /**
- *
+ * Has the constants
  */
 public class Constants {
     

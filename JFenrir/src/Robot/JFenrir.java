@@ -6,7 +6,7 @@
 package Robot;
 
 /**
- *
+ * Main method?
  */
 public class JFenrir {
     

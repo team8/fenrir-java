@@ -13,12 +13,11 @@
 hs_err_pid*
 
 # NetBeans specific #
-nbproject/*
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
-/JavaApplication1/nbproject/private/
+*/nbproject/*
+*/nbproject/private/
+*/build/
+*/nbbuild/
+*/dist/
+*/nbdist/
+*/nbactions.xml
+*/nb-configuration.xml

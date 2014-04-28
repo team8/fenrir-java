@@ -43,4 +43,14 @@ public class Robot {
 	shooter.setAllVics(0);
 	accumulator.disable();
     }
+    
+    public double getRightEnc() 
+    {
+	return driveTrain.getRightEnc();
+    }
+	
+    public double getLeftEnc() 
+    {
+	return driveTrain.getLeftEnc();
+    }
 }

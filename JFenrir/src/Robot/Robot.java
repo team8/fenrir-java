@@ -18,10 +18,10 @@ public class Robot {
     
     public Robot()
     {
-        driveTrain = new DriveTrain();
-	    shooter = new Shooter();
-	    accumulator = new Accumulator(); 
-	    rangefinder = new Rangefinder();
+    	driveTrain = new DriveTrain();
+    	shooter = new Shooter();
+	accumulator = new Accumulator(); 
+	rangefinder = new Rangefinder();
     }
     
 }

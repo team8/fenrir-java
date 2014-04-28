@@ -36,5 +36,11 @@ public class Robot {
     {
     	driveTrain.init();
     }
-
+    
+    public void disable()
+    {
+	driveTrain.setSpeed(0);
+	shooter.setAllVics(0);
+	accumulator.disable();
+    }
 }

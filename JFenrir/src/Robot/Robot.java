@@ -44,6 +44,11 @@ public class Robot {
 	accumulator.disable();
     }
     
+    public void setCommand(RobotCommand command)
+    {
+    	
+    }
+    
     public double getRightEnc() 
     {
 	return driveTrain.getRightEnc();

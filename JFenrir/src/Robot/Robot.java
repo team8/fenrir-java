@@ -24,4 +24,17 @@ public class Robot {
 	rangefinder = new Rangefinder();
     }
     
+    public void update()
+    {
+    	accumulator.update();
+	driveTrain.update();
+	shooter.update();
+	rangefinder.update();
+    }
+    
+    public void init() 
+    {
+    	driveTrain.init();
+    }
+
 }

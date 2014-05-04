@@ -54,7 +54,7 @@ public class RobotCommand {
         SHOOTER,
         ACCUMULATOR,
         RANGEFINDER,
-        ROBOT
+        ROBOT;
     }
 
 	/*SUBSYSTEM METHODS*/
@@ -63,19 +63,19 @@ public class RobotCommand {
         DRIVEDIST,
         ROTATEANGLE,
         ROTATESPEED,
-        STOPVICTORS
+        STOPVICTORS;
     }
 
     public enum AccumulatorMethod {
         ACCUMULATE,
         STOP,
-        PASS
+        PASS;
     }
 
     public enum ExtensionMethod {
         FOWARD,
         BACKWARD,
-        HALT
+        HALT;
     }
 
     public enum ShooterMethod {
@@ -84,7 +84,7 @@ public class RobotCommand {
         IDLE,
         FLUSH,
         MANUAL_FIRE,
-        MANUAL_LOAD
+        MANUAL_LOAD;
     }
 
     public enum RangefinderMethod {
@@ -92,11 +92,11 @@ public class RobotCommand {
         SET_DIST,
         LEFT_ON,
         RIGHT_ON,
-        WALL_DIST
+        WALL_DIST;
     }
 
     public enum RobotMethod {
-        ALIGN_THEN_SHOOT
+        ALIGN_THEN_SHOOT;
     }
 
     Object arg;

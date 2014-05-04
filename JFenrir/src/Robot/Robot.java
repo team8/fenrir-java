@@ -46,7 +46,23 @@ public class Robot {
 
     public void setCommand(RobotCommand command)
     {
-
+        switch (command.getSubsystem()) {
+            case DRIVE:
+                driveTrain.runCommand(command);
+                break;
+            case SHOOTER:
+                shooter.runCommand(command);
+                break;
+            case ACCUMULATOR:
+                accumulator.runCommand(command);
+                break;
+            case RANGEFINDER:
+                rangefinder.runCommand(command);
+                break;
+            case ROBOT:
+                runCommand(command);
+                break;
+        }
     }
 
     public double getRightEnc()

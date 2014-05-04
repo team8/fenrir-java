@@ -10,52 +10,52 @@ package Robot;
  * @author Paly Robotics
  */
 public class Robot {
-    
+
     private DriveTrain driveTrain;
     private Shooter shooter;
     private Accumulator accumulator;
     private Rangefinder rangefinder;
-    
+
     public Robot()
     {
-    	driveTrain = new DriveTrain();
-    	shooter = new Shooter();
-	accumulator = new Accumulator(); 
-	rangefinder = new Rangefinder();
+        driveTrain = new DriveTrain();
+        shooter = new Shooter();
+        accumulator = new Accumulator();
+        rangefinder = new Rangefinder();
     }
-    
+
     public void update()
     {
-    	accumulator.update();
-	driveTrain.update();
-	shooter.update();
-	rangefinder.update();
+        accumulator.update();
+        driveTrain.update();
+        shooter.update();
+        rangefinder.update();
     }
-    
-    public void init() 
+
+    public void init()
     {
-    	driveTrain.init();
+        driveTrain.init();
     }
-    
+
     public void disable()
     {
-	driveTrain.setSpeed(0);
-	shooter.setAllVics(0);
-	accumulator.disable();
+        driveTrain.setSpeed(0);
+        shooter.setAllVics(0);
+        accumulator.disable();
     }
-    
+
     public void setCommand(RobotCommand command)
     {
-    	
+
     }
-    
-    public double getRightEnc() 
+
+    public double getRightEnc()
     {
-	return driveTrain.getRightEnc();
+        return driveTrain.getRightEnc();
     }
-	
-    public double getLeftEnc() 
+
+    public double getLeftEnc()
     {
-	return driveTrain.getLeftEnc();
+        return driveTrain.getLeftEnc();
     }
 }

@@ -43,35 +43,21 @@ public class Robot {
         shooter.setAllVics(0);
         accumulator.disable();
     }
-
-    public void setCommand(RobotCommand command)
-    {
-        switch (command.getSubsystem()) {
-            case DRIVE:
-                driveTrain.runCommand(command);
-                break;
-            case SHOOTER:
-                shooter.runCommand(command);
-                break;
-            case ACCUMULATOR:
+    
+    public void relayCommand(RobotCommand command) {
+        switch(command.subsystemType) {
+            case RobotCommand.ACCUMULATOR:
                 accumulator.runCommand(command);
                 break;
-            case RANGEFINDER:
+            case RobotCommand.DRIVETRAIN:
+                driveTrain.runCommand(command);
+                break;
+            case RobotCommand.RANGEFINDER:
                 rangefinder.runCommand(command);
                 break;
-            case ROBOT:
-                runCommand(command);
+            case RobotCommand.SHOOTER:
+                shooter.runCommand(command);
                 break;
         }
-    }
-
-    public double getRightEnc()
-    {
-        return driveTrain.getRightEnc();
-    }
-
-    public double getLeftEnc()
-    {
-        return driveTrain.getLeftEnc();
     }
 }

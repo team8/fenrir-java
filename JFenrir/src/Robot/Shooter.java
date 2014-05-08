@@ -5,15 +5,16 @@
 
 package Robot;
 
+import edu.wpi.first.wpilibj.*;
 /**
  * Runs the shooter
  * @author Neelay Junnarkar
  */
 public class Shooter extends Subsystem{
 
-    public final int state;
+    private int state;
     
-    public static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4;
+    private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4;
 
     private Victor shooterVic1;
     private Victor shooterVic2;
@@ -21,15 +22,20 @@ public class Shooter extends Subsystem{
     private Victor shooterVic4;
     private Victor loaderVic;
     
-    Timer timer;
+    private Timer shootTimer;
     
     
     public Shooter(){
+        
         shooterVic1 = new Victor(PORT_SHOOTER_VIC_1);
         shooterVic2 = new Victor(PORT_SHOOTER_VIC_2);
         shooterVic3 = new Victor(PORT_SHOOTER_VIC_3);
         shooterVic4 = new Victor(PORT_SHOOTER_VIC_4);
         loaderVic = new Victor(PORT_LOADER_VIC);
+        
+        shootTimer = new Timer;
+        
+        init();
     }
     
     @Override
@@ -49,16 +55,27 @@ public class Shooter extends Subsystem{
                 setAllVics(0.0);
                 break;
             case PREPARING:
-                
+                if (!shootTimer.hasPassedPeriod(3.0)){
+                    setShooterVics(3.0 );
+                }
+                else{
+                    state = FIRING;
+                    shootTimer.reset();
+                }
                 break;
             case FIRING:
-                
+                if (!shootTimer.hasPeriodPassed(3.0)){
+			        loaderVic.Set(LOAD_SPEED);
+		           }
+		        else {
+    		    	state = IDLE;
+    		    }   
                 break;
             case EJECTING:
-                
+                loaderVic.set(1);
                 break;
             case FLUSHING:
-                
+                setAllVics(-0.3);
                 break;
         }
     }

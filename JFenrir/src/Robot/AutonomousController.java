@@ -10,5 +10,7 @@ package Robot;
  * @author Paly Robotics
  */
 public class AutonomousController {
-    
+    private void path() {
+        //command to drive correct distance
+    }
 }

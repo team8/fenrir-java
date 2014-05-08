@@ -10,5 +10,5 @@ public interface RobotCommand {
 	/**
 	 * Execute is a method that carries out a certain task that the command is supposed to do.
 	 */
-	void execute;
+	void execute();
 }

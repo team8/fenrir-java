@@ -24,5 +24,5 @@ public abstract class RobotCommand {
 	/**
 	 * Execute is a method that carries out a certain task that the command is supposed to do.
 	 */
-	abstract void execute();
+	abstract void execute(Object... objects);
 }

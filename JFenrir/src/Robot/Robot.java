@@ -16,35 +16,32 @@ public class Robot {
     private Accumulator accumulator;
     private Rangefinder rangefinder;
 
-    public Robot()
-    {
+    public Robot(){
         driveTrain = new DriveTrain();
         shooter = new Shooter();
         accumulator = new Accumulator();
         rangefinder = new Rangefinder();
     }
 
-    public void update()
-    {
+    public void update(){
         accumulator.update();
         driveTrain.update();
         shooter.update();
         rangefinder.update();
     }
 
-    public void init()
-    {
+    public void init(){
         driveTrain.init();
+        shooter.init();
     }
 
-    public void disable()
-    {
+    public void disable(){
         driveTrain.setSpeed(0);
-        shooter.setAllVics(0);
+        shooter.disable();
         accumulator.disable();
     }
     
-    public void relayCommand(RobotCommand command) {
+    public void relayCommand(RobotCommand command){
         switch(command.subsystemType) {
             case RobotCommand.ACCUMULATOR:
                 accumulator.runCommand(command);

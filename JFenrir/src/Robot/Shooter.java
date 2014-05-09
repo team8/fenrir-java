@@ -36,7 +36,6 @@ public class Shooter extends Subsystem{
         
         shootTimer = new Timer;
         
-        init();
     }
     
     @Override

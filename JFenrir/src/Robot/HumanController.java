@@ -5,6 +5,8 @@
 
 package Robot;
 
+import edu.wpi.first.wpilibj.*;
+
 /**
  * Human controller
  * @author Paly Robotics
@@ -35,25 +37,25 @@ public class HumanController {
     }
     public void update() {
         /*SLIGHT MOVEMENT WITHOUT TURNING*/
-        if(abs(getTurnStick()) <= 0.1 && abs(getSpeedStick()) <= 0.1) {
+        if(Math.abs(getTurnStick()) <= 0.1 && Math.abs(getSpeedStick()) <= 0.1) {
             //command for speedstick y to drive
             
             //command rot speed 0
         }
         /*FULL MOVEMENT*/
-        if(abs(getSpeedStick()) > 0.1) {
+        if(Math.abs(getSpeedStick()) > 0.1) {
             // command for speedstick y to drive
         }
-        if(abs(getTurnStick()) > 0.1) {
+        if(Math.abs(getTurnStick()) > 0.1) {
             // command for turnstick x to drive
         }
         /*ACCUMULATOR*/
         //fix logic
-        if(getAccum() < -0.2) {
+        if(getAccumY() < -0.2) {
             //accumulate AND SET LOADER WHEELS DEAD ONCE
             accumPrev = false;
         }
-        else if(getAccum() > 0.2) {
+        else if(getAccumY() > 0.2) {
             // command to eject loader wheels
             
             //command to pass accum
@@ -103,18 +105,18 @@ public class HumanController {
         double turn = turnStick.getX();
         return turn;
     }
-    private double getAccumStick() {
+    private double getAccumY() {
         double accum = operatorStick.getY();
         return accum;
     }
-    private double getShootButton() {
+    private boolean getShootButton() {
         boolean button = operatorStick.getTrigger();
         return button;
     }
     private boolean getFlushTrigger() {
         //add button ports here
-        boolean button = operatorStick.getRawButton()
-        return button
+        boolean button = operatorStick.getRawButton();
+        return button;
     }
     private double getOperatorZ() {
         double zVal = operatorStick.getZ();

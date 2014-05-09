@@ -3,7 +3,7 @@
  * 
  * @author Tyler Packard
  */
-public abstract Subsystem {
+public abstract class Subsystem {
 
 	/**
 	 * Initialize the subsystem.

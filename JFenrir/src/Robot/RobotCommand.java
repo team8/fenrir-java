@@ -11,7 +11,7 @@ public abstract class RobotCommand {
 	/**
 	 * The subsystem the robot class should send the command to.
 	 */
-	public final int SubsystemType;
+	public final int subsystemType;
 	
 	/**
 	 * Numbers that represent each sumbsystem.

@@ -14,7 +14,8 @@ public class Shooter extends Subsystem{
 
     private int state;
     
-    private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4;
+    //states, replacement for enum
+    private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4, MANUAL_LOAD = 5, MANUAL_FIRE = 6;
 
     private Victor shooterVic1;
     private Victor shooterVic2;
@@ -27,11 +28,11 @@ public class Shooter extends Subsystem{
     
     public Shooter(){
         
-        shooterVic1 = new Victor(PORT_SHOOTER_VIC_1);
-        shooterVic2 = new Victor(PORT_SHOOTER_VIC_2);
-        shooterVic3 = new Victor(PORT_SHOOTER_VIC_3);
-        shooterVic4 = new Victor(PORT_SHOOTER_VIC_4);
-        loaderVic = new Victor(PORT_LOADER_VIC);
+        shooterVic1 = new Victor(Constants.PORT_SHOOTER_VIC_1);
+        shooterVic2 = new Victor(Constants.PORT_SHOOTER_VIC_2);
+        shooterVic3 = new Victor(Constants.PORT_SHOOTER_VIC_3);
+        shooterVic4 = new Victor(Constants.PORT_SHOOTER_VIC_4);
+        loaderVic = new Victor(Constants.PORT_LOADER_VIC);
         
         shootTimer = new Timer;
         
@@ -65,11 +66,11 @@ public class Shooter extends Subsystem{
                 break;
             case FIRING:
                 if (!shootTimer.hasPeriodPassed(3.0)){
-			        loaderVic.Set(LOAD_SPEED);
-		           }
-		        else {
-    		    	state = IDLE;
-    		    }   
+			loaderVic.Set(Constants.LOAD_SPEED);
+		}
+		else{
+    		    state = IDLE;
+    		}   
                 break;
             case EJECTING:
                 loaderVic.set(1);
@@ -77,6 +78,12 @@ public class Shooter extends Subsystem{
             case FLUSHING:
                 setAllVics(-0.3);
                 break;
+            case MANUAL_LOAD:
+            	loaderVic.set(Constants.LOAD_SPEED);
+            	break;
+            case MANUAL_FIRE:
+            	setAllVics(1.0);
+            	break;
         }
     }
     

@@ -13,7 +13,7 @@ public class Drivetrain {
 	
 	public static abstract DrivetrainCommand extends RobotCommand {
 		public DrivetrainCommand() {
-			subsystemType = DRIVETRAIN;
+			setSubsystemType(DRIVETRAIN);
 		}
 		
 		abstract void execute(Drivetrain drivetrain);

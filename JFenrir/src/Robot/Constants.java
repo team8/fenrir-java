@@ -29,7 +29,7 @@ public class Constants {
     public final static int PORT_ENCODER_RIGHT_B = 2;
     public final static int PORT_ENCODER_LEFT_A = 5;
     public final static int PORT_ENCODER_LEFT_B = 6;
-    public final static double DISTANCE_PER_ROT = 6*Math.atan(1)*4; //6 pi for prototype
+    public final static double DISTANCE_PER_ROT = 6*Math.PI; //6 pi for prototype
     //ports for drive train gyroscopes
     public final static int PORT_GYRO = 0;
 

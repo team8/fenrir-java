@@ -59,8 +59,8 @@ public class Drivetrain {
 		leftBackController.setOutputRange(-1, 1);
 		rightEnc.setDistancePerPulse(.0782);//(.07734);
 		leftEnc.setDistancePerPulse(.0813);//(.07849);
-		rightEnc.setPIDSourceParameter(PIDSource::kDistance);
-		leftEnc.setPIDSourceParameter(PIDSource::kDistance);
+		rightEnc.setPIDSourceParameter(PIDSource.kDistance);
+		leftEnc.setPIDSourceParameter(PIDSource.kDistance);
 		state = STOPPED;
 	}
 
@@ -82,13 +82,13 @@ public class Drivetrain {
 			break;
 	
 		case DRIVING:
-			double average = (rightEnc.GetDistance()+leftEnc.GetDistance())/2;
-			if(rightEnc.GetDistance() < abs(targetDist)){
+			double average = (rightEnc.getDistance()+leftEnc.getDistance())/2;
+			if(rightEnc.getDistance() < Math.abs(targetDist)){
 				System.out.println("getting called right");
 				rightFrontVic.set(0.3);
 				rightBackVic.set(0.3);
 			}
-			if(leftEnc.GetDistance() < abs(targetDist)){
+			if(leftEnc.getDistance() < Math.abs(targetDist)){
 				System.out.println("getting called left");
 				leftFrontVic.set(-0.3);
 				leftBackVic.set(-0.3);
@@ -105,10 +105,10 @@ public class Drivetrain {
 			break;
 	
 		case STOPPED:
-			leftFrontVic.Set(0);
-			leftBackVic.Set(0);
-			rightFrontVic.Set(0);
-			rightBackVic.Set(0);
+			leftFrontVic.set(0);
+			leftBackVic.set(0);
+			rightFrontVic.set(0);
+			rightBackVic.set(0);
 			break;
 		}
 	}
@@ -148,7 +148,7 @@ public class Drivetrain {
 	}
 
 	
-	public static abstract DrivetrainCommand extends RobotCommand {
+	public static abstract class DrivetrainCommand extends RobotCommand {
 		public DrivetrainCommand() {
 			setSubsystemType(DRIVETRAIN);
 		}

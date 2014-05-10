@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.*;
  */
 public class Drivetrain {
 	
-		// Victors 
+	// Victors 
 	private Victor leftFrontVic;
 	private Victor leftBackVic;
 	private Victor rightFrontVic;
@@ -39,7 +39,14 @@ public class Drivetrain {
 	// For testing
 	private double prevLeftDist;
 	private double prevRightDist;
-
+	
+	//state 
+	private int state;
+	public final static int DRIVE_DIST;
+	public final static int ROTATE_SPEED;
+	public final static int TURN_ANGLE;
+	public final static int STOP_VICTORS;
+	
 	public static abstract DrivetrainCommand extends RobotCommand {
 		public DrivetrainCommand() {
 			setSubsystemType(DRIVETRAIN);

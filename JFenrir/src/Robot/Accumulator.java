@@ -51,4 +51,36 @@ public class Accumulator extends Subsytem{
         accuVic.set(spd);
     }
     
+    public static class AccumulateCommand extends RobotCommand {
+        subsystemType = ACCUMULATOR;
+        
+        void execute(Accumulator accu){
+            accu.state = ACCUMULATING;
+        }
+    }
+    
+    public static class PassCommand extends RobotCommand {
+        subsystemType = ACCUMULATOR;
+        
+        void execute(Accumulator accu){
+            accu.state = PASSING;
+        }
+    }
+    
+    public static class FlushCommand extends RobotCommand{
+        subsystemType = ACCUMULATOR;
+        
+        void execute(Accumulator accu){
+            accu.state = PASSING;
+        }
+    }
+    
+    public static class SetIdleCommand extends RobotCommand {
+        subsystemType = ACCUMULATOR;
+        
+        void execute(Accumulator accu){
+            accu.state = IDLE;
+        }
+    }
+    
 }

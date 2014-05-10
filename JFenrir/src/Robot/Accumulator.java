@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.*;
  * Runs the accumulator
  * @author 
  */
-public class Accumulator extends Subsytem{
+public class Accumulator extends Subsystem {
     
     private Victor accuVic;
     
@@ -22,19 +22,16 @@ public class Accumulator extends Subsytem{
         accuVic = new Victor(Constants.PORT_ACCUMULATOR_VIC_7);
     }
     
-    @Override
     public void init(){
         state = IDLE;
     }
     
-    @Override
     public void disable(){
         state = IDLE;
     }
     
-    @Override
     public void update(){
-        switch (state){
+      switch(state){
             case IDLE:
                 setAllVics(0.0);
                 break;
@@ -52,7 +49,7 @@ public class Accumulator extends Subsytem{
     }
     
     public static class AccumulateCommand extends RobotCommand {
-        subsystemType = ACCUMULATOR;
+    	subsystemType = ACCUMULATOR;
         
         void execute(Accumulator accu){
             accu.state = ACCUMULATING;

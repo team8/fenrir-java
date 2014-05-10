@@ -38,17 +38,14 @@ public class Shooter extends Subsystem{
         
     }
     
-    @Override
     public void init(){
         state = IDLE;
     }
     
-    @Override
     public void disable(){
         state = IDLE;
     }
     
-    @Override
     public void update(){
         switch (state){
             case IDLE:
@@ -65,11 +62,11 @@ public class Shooter extends Subsystem{
                 break;
             case FIRING:
                 if (!shootTimer.hasPeriodPassed(3.0)){
-			loaderVic.Set(Constants.LOAD_SPEED);
-		}
-		else{
-    		    state = IDLE;
-    		}   
+                	loaderVic.set(Constants.LOAD_SPEED);
+                }
+                else{
+                	state = IDLE;
+                }   
                 break;
             case EJECTING:
                 loaderVic.set(1);
@@ -102,7 +99,7 @@ public class Shooter extends Subsystem{
     }
     
     public static class EjectCommand extends RobotCommand {
-    	subsytemType = SHOOTER;
+    	subsystemType = SHOOTER;
     	
     	void execute(Shooter shooter){
     		shooter.state = EJECTING;

@@ -23,7 +23,6 @@ public class HumanController
 	}
 
 	public void update() {
-		void * argPointer = malloc(sizeof(DriveArgs));
 
 		/*SLIGHT MOVEMENT*/
 		if(getAbsTurnStick()<=.1 && getAbsSpeedStick()<=.1) {
@@ -73,7 +72,6 @@ public class HumanController
 		/*SHOOTER*/
 		if(getOperatorZ() < 0.5) {
 			if(shootButtonPrev!=getShootButton() && getShootButton()) {
-				//((DriveArgs*) argPointer)->driveDist = 10; ??? What is this ???
 				robot.relayCommand(new Shooter.FireCommand());
 			}
 			else if (!prevZ) {
@@ -118,20 +116,20 @@ public class HumanController
 		return operatorStick.GetY(); // For testing purposes
 	}
 	
-	private bool getShootButton() {
+	private boolean getShootButton() {
 		// Get trigger button to shoot from Operator stick
 		// return false;
 		return operatorStick.GetRawButton((uint_t)3);
 	}
 	
-	private bool getFlushTrigger() {
+	private boolean getFlushTrigger() {
 		//flush out the ball
 		return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
 	}
 	private double getOperatorZ() {
 		return operatorStick.GetThrottle();
 	}
-	private bool getRangeButton() {
+	private boolean getRangeButton() {
 		return operatorStick.GetRawButton((uint32_t)4);
 	}	
 }

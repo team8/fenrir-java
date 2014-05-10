@@ -42,10 +42,58 @@ public class Drivetrain {
 	
 	//state 
 	private int state;
-	public final static int DRIVING;
-	public final static int ROTATING;
-	public final static int TURNING;
-	public final static int STOPPED;
+	public final static int STOPPED = 0;
+	public final static int DRIVING = 1;
+	public final static int ROTATING = 2;
+	public final static int TURNING = 3;
+	
+	public void update() {
+	
+		//std::printf("Left Enc: %f\n",leftEnc.GetDistance()); 
+		//std::printf("Right Enc: %f\n",rightEnc.GetDistance());
+	
+		switch (state) {
+	
+		case ROTATING:
+			double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
+			double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
+			leftFrontVic.Set(leftSpeed);
+			leftBackVic.Set(leftSpeed);
+			rightFrontVic.Set(rightSpeed);
+			rightBackVic.Set(rightSpeed);
+			break;
+	
+		case DRIVING:
+		//	double average = (rightEnc.GetDistance()+leftEnc.GetDistance())/2;
+	//		if(rightEnc.GetDistance() < abs(targetDist)){
+	//			std::printf("getting called right");
+	//			rightFrontVic.Set(0.3);
+	//			rightBackVic.Set(0.3);
+	//		}
+	//		if(leftEnc.GetDistance() < abs(targetDist)){
+	//			std::printf("getting called left");
+	//			leftFrontVic.Set(-0.3);
+	//			leftBackVic.Set(-0.3);
+	//		}
+	
+	
+		break;
+	
+		case TURNING:
+			//		leftFrontVic.Set(-(angleController.Get()));
+			//		leftBackVic.Set(-(angleController.Get()));
+			//		rightFrontVic.Set(angleController.Get());
+			//		rightBackVic.Set(angleController.Get());
+		break;
+	
+		case STOPPED:
+			leftFrontVic.Set(0);
+			leftBackVic.Set(0);
+			rightFrontVic.Set(0);
+			rightBackVic.Set(0);
+			break;
+		}
+	}
 	
 	public static abstract DrivetrainCommand extends RobotCommand {
 		public DrivetrainCommand() {

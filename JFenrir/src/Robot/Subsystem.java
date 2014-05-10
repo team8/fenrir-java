@@ -19,9 +19,4 @@ public abstract class Subsystem {
 	 * Update the subsystem.
 	 */
 	public void update() {}
-	
-	/**
-	 * Give the subsystem a command to run.
-	 */
-	public void runCommand(RobotCommand command) {}
 }

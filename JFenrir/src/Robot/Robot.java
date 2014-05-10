@@ -11,13 +11,13 @@ package Robot;
  */
 public class Robot {
 
-    private DriveTrain driveTrain;
+    private Drivetrain driveTrain;
     private Shooter shooter;
     private Accumulator accumulator;
     private Rangefinder rangefinder;
 
     public Robot(){
-        driveTrain = new DriveTrain();
+        driveTrain = new Drivetrain();
         shooter = new Shooter();
         accumulator = new Accumulator();
         rangefinder = new Rangefinder();

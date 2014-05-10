@@ -23,8 +23,12 @@ public abstract class RobotCommand {
 	
 	/**
 	 * Execute is a method that carries out a certain task that the command is supposed to do.
+	 * Default method only runs when wrong subsystem is used, and throws IllegalArgumentException.
 	 * 
 	 * @param subsystem The subsystem that will run the command
 	 */
-	abstract void execute(Subsystem subsystem);
+	public void execute(Subsystem subsystem)
+	{
+		throw new IllegalArgumentException("The wrong subsystem type was used.");
+	}
 }

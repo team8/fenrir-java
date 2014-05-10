@@ -50,27 +50,16 @@ public class Rangefinder extends Subsystem {
 	    // Send a command to drivetrain
 	}
     
-    @Override
+    	@Override
 	public void update() {
 	    
 	}
-	
-	 @Override
-    public void runCommand(RobotCommand command) {
-        command.execute(this);
-    }
     
-    
-    public static class FindDistCommand extends RobotCommand {
-    	@Override
-    	void execute(Subsystem subsystem) {
-    		if (subsystem instanceof Rangefinder) {
-    			Rangefinder rangefinder = (Rangefinder) subsystem;
+    	public static class FindDistCommand extends RobotCommand {
+    		@Override
+    		void execute(Rangefinder rangefinder) {
     			rangefinder.state = LEFT;
     			rangefinder.distInch = 0;
-    		} else {
-    			throw new IllegalArgumentException("The given subsystem was not a rangefinder");
     		}
     	}
-    }
 }

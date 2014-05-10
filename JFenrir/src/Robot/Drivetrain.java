@@ -10,17 +10,24 @@ package Robot;
  * @author Paly Robotics
  */
 public class Drivetrain {
-    
-    public static class SetSpeedCommand extends RobotCommand {
-    	private int speed;
-        
+	
+	public static abstract DrivetrainCommand extends RobotCommand {
+		public DrivetrainCommand() {
+			subsystemType = DRIVETRAIN;
+		}
+		
+		abstract void execute(Drivetrain drivetrain);
+	}
+	
+	public static class SetSpeedCommand extends DrivetrainCommand {
+		private int speed;
+		
 		public SetSpeedCommand(int speed) {
-        	this.speed = speed;
-        	subsystemType = DRIVETRAIN;
-        }
-        
-        public void execute(Drivetrain drivetrain) {
-            // Set the speed of the victors to the variable speed
-        }
-    }
+			this.speed = speed;
+		}
+		
+		public void execute(Drivetrain drivetrain) {
+			// Set the speed of the victors to the variable speed
+		}
+	}
 }

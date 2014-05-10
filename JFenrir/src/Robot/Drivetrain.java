@@ -64,17 +64,17 @@ public class Drivetrain {
 			break;
 	
 		case DRIVING:
-			//	double average = (rightEnc.GetDistance()+leftEnc.GetDistance())/2;
-			//		if(rightEnc.GetDistance() < abs(targetDist)){
-			//			std::printf("getting called right");
-			//			rightFrontVic.Set(0.3);
-			//			rightBackVic.Set(0.3);
-			//		}
-			//		if(leftEnc.GetDistance() < abs(targetDist)){
-			//			std::printf("getting called left");
-			//			leftFrontVic.Set(-0.3);
-			//			leftBackVic.Set(-0.3);
-			//		}
+			double average = (rightEnc.GetDistance()+leftEnc.GetDistance())/2;
+			if(rightEnc.GetDistance() < abs(targetDist)){
+				System.out.println("getting called right");
+				rightFrontVic.Set(0.3);
+				rightBackVic.Set(0.3);
+			}
+			if(leftEnc.GetDistance() < abs(targetDist)){
+				System.out.println("getting called left");
+				leftFrontVic.Set(-0.3);
+				leftBackVic.Set(-0.3);
+			}
 	
 	
 			break;

@@ -11,7 +11,7 @@ public abstract class RobotCommand {
 	/**
 	 * The subsystem the robot class should send the command to.
 	 */
-	public int subsystemType;
+	private int subsystemType;
 	
 	/**
 	 * Numbers that represent each subsystem.
@@ -20,6 +20,15 @@ public abstract class RobotCommand {
 	public static final int DRIVETRAIN = 1;
 	public static final int RANGEFINDER = 2;
 	public static final int SHOOTER = 3;
+	
+	/**
+	 * Accessor method for subsystemType
+	 * 
+	 * @return systemType
+	 */
+	public int getSubsystemType() {
+		return subsystemType;
+	}
 	
 	/**
 	 * Execute is a method that carries out a certain task that the command is supposed to do.

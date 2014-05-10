@@ -15,7 +15,7 @@ public class Constants {
     public final int PORT_TURN = 2;
     public final int PORT_OPERATOR = 3;
 
-    //Helps refine sensitivity of joystiks
+    //Helps refine sensitivity of joysticks
     public final double SPEED_SENSITIVITY = 0.5;
     public final int ROTATE_SENSITIVITY;     //No value?
 //ports for drive train victors

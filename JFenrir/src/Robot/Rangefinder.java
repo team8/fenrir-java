@@ -63,14 +63,8 @@ public class Rangefinder extends Subsystem {
     
     public static class FindDistCommand extends RobotCommand {
     	@Override
-    	void execute(Subsystem subsystem) {
-    		if (subsystem instanceof Rangefinder) {
-    			Rangefinder rangefinder = (Rangefinder) subsystem;
-    			rangefinder.state = LEFT;
-    			rangefinder.distInch = 0;
-    		} else {
-    			throw new IllegalArgumentException("The given subsystem was not a rangefinder");
-    		}
+    	void execute(Rangefinder rangefinder) {
+    		
     	}
     }
 }

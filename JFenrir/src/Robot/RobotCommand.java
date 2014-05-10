@@ -11,10 +11,10 @@ public abstract class RobotCommand {
 	/**
 	 * The subsystem the robot class should send the command to.
 	 */
-	public final int subsystemType;
+	public int subsystemType;
 	
 	/**
-	 * Numbers that represent each sumbsystem.
+	 * Numbers that represent each subsystem.
 	 */
 	public static final int ACCUMULATOR = 0;
 	public static final int DRIVETRAIN = 1;
@@ -23,6 +23,8 @@ public abstract class RobotCommand {
 	
 	/**
 	 * Execute is a method that carries out a certain task that the command is supposed to do.
+	 * 
+	 * @param subsystem The subsystem that will run the command
 	 */
-	abstract void execute(Object... objects);
+	abstract void execute(Subsystem subsystem);
 }

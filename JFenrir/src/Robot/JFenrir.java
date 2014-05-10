@@ -16,59 +16,59 @@ public class JFenrir extends IterativeRobot {
     private AutonomousController autoController;
     private Timer timer;
     
-    public JFenrir(){
+    public JFenrir() {
         robot = new Robot();
         humanController = new HumanController(robot);
         autoController = new AutonomousControler(robot);
         timer = new Timer();
     }
     
-    public void robotInit(){
-        robot.init();   
+    public void robotInit() {
+        robot.init();
     }
     
-    public void autonomousInit(){
+    public void autonomousInit() {
         timer.start();
 	    robot.init();
 	    autoController.init();
     }
     
-    public void autonomousPeriodic(){
+    public void autonomousPeriodic() {
         autoController.update();
         robot.update();
     }
     
-    public void autonomousDisabled(){
+    public void autonomousDisabled() {
         
     }
     
-    public void disabledInit(){
+    public void disabledInit() {
         robot.disable();   
     }
     
-    public void disabledPeriodic(){
+    public void disabledPeriodic() {
         robot.disable();
         robot.update();
     }
     
-    public void teleopInit(){
+    public void teleopInit() {
         robot.init();
     }
     
-    public void teleopPeriodic(){
+    public void teleopPeriodic() {
         humanController.update();
         robot.update();
     }
     
-    public void teleopDisabled(){
+    public void teleopDisabled() {
         
     }
     
-    public void testInit(){
+    public void testInit() {
         
     }
     
-    public void testPeriodic(){
+    public void testPeriodic() {
         
     }
     

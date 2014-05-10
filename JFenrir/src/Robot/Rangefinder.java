@@ -50,21 +50,16 @@ public class Rangefinder extends Subsystem {
 	    // Send a command to drivetrain
 	}
     
-    @Override
+    	@Override
 	public void update() {
 	    
 	}
-	
-	 @Override
-    public void runCommand(RobotCommand command) {
-        command.execute(this);
-    }
     
-    
-    public static class FindDistCommand extends RobotCommand {
-    	@Override
-    	void execute(Rangefinder rangefinder) {
-    		
+    	public static class FindDistCommand extends RobotCommand {
+    		@Override
+    		void execute(Rangefinder rangefinder) {
+    			rangefinder.state = LEFT;
+    			rangefinder.distInch = 0;
+    		}
     	}
-    }
 }

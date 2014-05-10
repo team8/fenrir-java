@@ -1,3 +1,7 @@
+package Robot;
+
+import edu.wpi.first.wpilibj.*;
+
 public class HumanController
 {
 	private Robot robot;
@@ -32,7 +36,7 @@ public class HumanController
 
 		/*FULL MOVEMENT*/
 		if(getAbsSpeedStick()>0.1) {
-			robot.relayCommand(new Drivetrain.SetSpeedCommand(speedStick.getY()));
+			robot.relayCommand(new Drivetrain.SetSpeedCommand((int)speedStick.getY()));
 		}
 		if(getAbsTurnStick()>0.1) {
 			robot.relayCommand(new Drivetrain.SetRotateCommand(rotStick.getX()));

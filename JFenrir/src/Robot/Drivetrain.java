@@ -5,12 +5,41 @@
 
 package Robot;
 
+import edu.wpi.first.wpilibj.*;
+
 /**
  * Runs the drivetrain
  * @author Paly Robotics
  */
 public class Drivetrain {
 	
+		// Victors 
+	private Victor leftFrontVic;
+	private Victor leftBackVic;
+	private Victor rightFrontVic;
+	private Victor rightBackVic;
+
+	//Gyro gyroscope;
+
+	private Encoder leftEnc;
+	private Encoder rightEnc;
+
+	private PIDController leftFrontController;
+	private PIDController rightFrontController;
+	private PIDController leftBackController;
+	private PIDController rightBackController;
+	//PIDController angleController;
+
+	//target speeds 
+	private double targetSpeed;
+	private double rotateSpeed;
+	private double rotateAngle;
+	private double targetDist;
+
+	// For testing
+	private double prevLeftDist;
+	private double prevRightDist;
+
 	public static abstract DrivetrainCommand extends RobotCommand {
 		public DrivetrainCommand() {
 			setSubsystemType(DRIVETRAIN);

@@ -9,7 +9,19 @@ package Robot;
  * Runs the drivetrain
  * @author Paly Robotics
  */
-public class DriveTrain {
+public class Drivetrain {
     
-    
+    public static class SetSpeedCommand extends RobotCommand {
+    	private int speed;
+        
+		public SetSpeedCommand(int speed) {
+        	this.speed = speed;
+        	subsystemType = DRIVETRAIN;
+        }
+        
+        @Override
+        public void execute(Drivetrain drivetrain) {
+            // Set the speed of the victors to the variable speed
+        }
+    }
 }

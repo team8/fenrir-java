@@ -15,7 +15,7 @@ public class Shooter extends Subsystem{
     private int state;
     
     //states, replacement for enum
-    private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4, MANUAL_LOAD = 5, MANUAL_FIRE = 6;
+    private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4, MANUAL_FIRING = 5, MANUAL_PREPARING = 6;
 
     private Victor shooterVic1;
     private Victor shooterVic2;
@@ -56,7 +56,7 @@ public class Shooter extends Subsystem{
                 break;
             case PREPARING:
                 if (!shootTimer.hasPassedPeriod(3.0)){
-                    setShooterVics(3.0 );
+                    setShooterVics(1.0);
                 }
                 else{
                     state = FIRING;
@@ -77,18 +77,13 @@ public class Shooter extends Subsystem{
             case FLUSHING:
                 setAllVics(-0.3);
                 break;
-            case MANUAL_LOAD:
+            case MANUAL_FIRING:
             	loaderVic.set(Constants.LOAD_SPEED);
             	break;
-            case MANUAL_FIRE:
-            	setAllVics(1.0);
+            case MANUAL_PREPARING:
+            	setShooterVics(1.0);
             	break;
         }
-    }
-    
-    @Override
-    public void runCommand(RobotCommand command){
-        
     }
     
     private void setAllVics(double spd){
@@ -105,4 +100,55 @@ public class Shooter extends Subsystem{
         shooterVic3.set(spd);
         shooterVic4.set(spd);
     }
+    
+    public static class EjectCommand extends RobotCommand {
+    	subsytemType = SHOOTER;
+    	
+    	void execute(Shooter shooter){
+    		shooter.state = EJECTING;
+    	}
+    }
+    
+    public static class SetIdleCommand extends RobotCommand {
+    	subsystemType = SHOOTER;
+    	
+    	void execute(Shooter shooter){
+    		shooter.state = IDLE;
+    	}
+    }
+    
+    public static class FlushCommand extends RobotCommand {
+    	subsystemType = SHOOTER;
+    	
+    	void execute(Shooter shooter){
+    		shooter.state = FLUSHING;
+    	}
+    }
+    
+    public static class FireCommand extends RobotCommand {
+    	subsystemType = SHOOTER;
+    	
+    	void execute(Shooter shooter){
+    		shooter.shootTimer.reset();
+    		shooter.state = PREPARING;
+    	}
+    }
+    
+    public static class ManualPrepareCommand extends RobotCommand {
+    	subsystemType = SHOOTER;
+    	
+    	void execute(Shooter shooter){
+    		shooter.state = MANUAL_PREPARING;
+    	}
+    }
+    
+    public static class ManualFireCommand extends RobotCommand {
+    	subsystemType = SHOOTER;
+    	
+    	void execute(Shooter shooter){
+    		shooter.state = MANUAL_FIRING;
+    	}
+    }
+    
+    public static class 
 }

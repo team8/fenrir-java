@@ -42,10 +42,10 @@ public class Drivetrain {
 	
 	//state 
 	private int state;
-	public final static int DRIVE_DIST;
-	public final static int ROTATE_SPEED;
-	public final static int TURN_ANGLE;
-	public final static int STOP_VICTORS;
+	public final static int DRIVING;
+	public final static int ROTATING;
+	public final static int TURNING;
+	public final static int STOPPED;
 	
 	public static abstract DrivetrainCommand extends RobotCommand {
 		public DrivetrainCommand() {

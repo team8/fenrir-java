@@ -102,7 +102,6 @@ public class Rangefinder extends Subsystem {
     	public static class FindDistCommand extends RobotCommand {
     		subsystemType = RANGEFINDER;
     		
-    		@Override
     		void execute(Rangefinder rangefinder) {
     			rangefinder.state = LEFT;
     			rangefinder.distInch = 0;

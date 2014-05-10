@@ -73,25 +73,25 @@ public class Drivetrain {
 		switch (state) {
 	
 		case ROTATING:
-			double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
-			double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-			leftFrontVic.Set(leftSpeed);
-			leftBackVic.Set(leftSpeed);
-			rightFrontVic.Set(rightSpeed);
-			rightBackVic.Set(rightSpeed);
+			double leftSpeed = Math.min(Math.max(-(targetSpeed + rotateSpeed), -1), 1);
+			double rightSpeed = Math.min(Math.max(targetSpeed - rotateSpeed, -1), 1);
+			leftFrontVic.set(leftSpeed);
+			leftBackVic.set(leftSpeed);
+			rightFrontVic.set(rightSpeed);
+			rightBackVic.set(rightSpeed);
 			break;
 	
 		case DRIVING:
 			double average = (rightEnc.GetDistance()+leftEnc.GetDistance())/2;
 			if(rightEnc.GetDistance() < abs(targetDist)){
 				System.out.println("getting called right");
-				rightFrontVic.Set(0.3);
-				rightBackVic.Set(0.3);
+				rightFrontVic.set(0.3);
+				rightBackVic.set(0.3);
 			}
 			if(leftEnc.GetDistance() < abs(targetDist)){
 				System.out.println("getting called left");
-				leftFrontVic.Set(-0.3);
-				leftBackVic.Set(-0.3);
+				leftFrontVic.set(-0.3);
+				leftBackVic.set(-0.3);
 			}
 	
 	

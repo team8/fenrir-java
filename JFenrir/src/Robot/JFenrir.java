@@ -1,75 +1,129 @@
-/*
- * See JFenrir.java for documentation
- * Coded by the 2013-14 Paly Robotics Programming Team
- */
-
 package Robot;
+
+import edu.wpi.first.wpilibj.*;
 
 /**
  * Main method?
- * @author Neelay Junnarkar
+ * 
+ * @author Nihar Mitra
+ * @author Rafi Long
  */
 public class JFenrir extends IterativeRobot {
-    
-    private Robot robot;
-    private HumanController humanController;
-    private AutonomousController autoController;
-    private Timer timer;
-    
-    public JFenrir() {
-        robot = new Robot();
-        humanController = new HumanController(robot);
-        autoController = new AutonomousControler(robot);
-        timer = new Timer();
-    }
-    
-    public void robotInit() {
-        robot.init();
-    }
-    
-    public void autonomousInit() {
-        timer.start();
-	    robot.init();
-	    autoController.init();
-    }
-    
-    public void autonomousPeriodic() {
-        autoController.update();
-        robot.update();
-    }
-    
-    public void autonomousDisabled() {
-        
-    }
-    
-    public void disabledInit() {
-        robot.disable();   
-    }
-    
-    public void disabledPeriodic() {
-        robot.disable();
-        robot.update();
-    }
-    
-    public void teleopInit() {
-        robot.init();
-    }
-    
-    public void teleopPeriodic() {
-        humanController.update();
-        robot.update();
-    }
-    
-    public void teleopDisabled() {
-        
-    }
-    
-    public void testInit() {
-        
-    }
-    
-    public void testPeriodic() {
-        
-    }
-    
+
+	/**
+	 * Robot object
+	 */
+	private Robot robot;
+	
+	/**
+	 * HumanController object
+	 */
+	private HumanController humanController;
+	
+	/**
+	 * AutonomousController object
+	 */
+	private AutonomousController autoController;
+	
+	/**
+	 * Timer object
+	 */
+	private Timer timer;
+
+	/**
+	 * JFenrir object
+	 */
+	public JFenrir() {
+		robot = new Robot();
+		humanController = new HumanController(robot);
+		autoController = new AutonomousController(robot);
+		timer = new Timer();
+	}
+
+	/**
+	 * Initializes robot
+	 * @see Robot#init()
+	 */
+	public void robotInit() {
+		robot.init();
+	}
+
+	/**
+	 * Initializes robot for autonomous
+	 * @see Robot#init() 
+	 * @see AutonomousController#init()
+	 */
+	public void autonomousInit() {
+		timer.start();
+		robot.init();
+		autoController.init();
+	}
+
+	/**
+	 * Updates the autoController and robot
+	 * @see AutonomousController#update()
+	 * @see Robot#update() 
+	 */
+	public void autonomousPeriodic() {
+		autoController.update();
+		robot.update();
+	}
+
+	public void autonomousDisabled() {
+
+	}
+
+	/**
+	 * Disables the robot
+	 * @see Robot#disable() 
+	 */
+	public void disabledInit() {
+		robot.disable();
+	}
+
+	/**
+	 * Disables the robot for periodic
+	 * @see Robot#disable() 
+	 * @see Robot#update()
+	 */
+	public void disabledPeriodic() {
+		robot.disable();
+		robot.update();
+	}
+
+	/**
+	 * Initializes the robot for teloep
+	 * @see Robot#init()
+	 */
+	public void teleopInit() {
+		robot.init();
+	}
+
+	/**
+	 * Updates for teleop
+	 * @see HumanController#update()
+	 * @see Robot#update()
+	 */
+	public void teleopPeriodic() {
+		humanController.update();
+		robot.update();
+	}
+
+	/**
+	 * Unused
+	 */
+	public void teleopDisabled() {
+
+	}
+
+	/**
+	 * Unused
+	 */
+	public void testInit() {
+
+	}
+
+	public void testPeriodic() {
+
+	}
 }

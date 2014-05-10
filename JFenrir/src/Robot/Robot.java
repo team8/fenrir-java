@@ -11,17 +11,11 @@ package Robot;
  */
 public class Robot {
 
-    private Drivetrain drivetrain;
-    private Shooter shooter;
-    private Accumulator accumulator;
-    private Rangefinder rangefinder;
-
-    public Robot(){
-        driveTrain = new Drivetrain();
-        shooter = new Shooter();
-        accumulator = new Accumulator();
-        rangefinder = new Rangefinder();
-    }
+    private Drivetrain drivetrain = new Drivetrain();
+    private Shooter shooter = new Shooter();
+    private Accumulator accumulator = new Accumulator();
+    private Rangefinder rangefinder = new Rangefinder();
+    
 
     public void update(){
         accumulator.update();
@@ -31,13 +25,13 @@ public class Robot {
     }
 
     public void init(){
-        driveTrain.init();
+        drivetrain.init();
         shooter.init();
         accumulator.init();
     }
 
     public void disable(){
-        driveTrain.setSpeed(0);
+        drivetrain.setSpeed(0);
         shooter.disable();
         accumulator.disable();
     }

@@ -55,7 +55,7 @@ public class Rangefinder extends Subsystem {
 	    switch (state) {
 	    	case IDLE:
 	    		rxLeft.set(0);
-	    		rxRight.set(1);
+	    		rxRight.set(0);
 	    		break;
 	    	case LEFT:
 	    		rxLeft.set(1);

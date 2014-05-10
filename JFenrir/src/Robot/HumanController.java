@@ -6,14 +6,14 @@ public class HumanController
 	private Joystick operatorStick;
 
 	//booleans used to make sure we don't reissue same command
-	private bool accuButtonPrev;
-	private bool shootButtonPrev;
-	private bool warmupButtonPrev;
-	private bool passButtonPrev;
-	private bool lastFlushTrigger;
-	private bool prevRangeButton;
-	private bool prevStop;
-	private bool prevZ;
+	private boolean accuButtonPrev;
+	private boolean shootButtonPrev;
+	private boolean warmupButtonPrev;
+	private boolean passButtonPrev;
+	private boolean lastFlushTrigger;
+	private boolean prevRangeButton;
+	private boolean prevStop;
+	private boolean prevZ;
 
 
 	public HumanController(Robot robot) {

@@ -47,6 +47,24 @@ public class Drivetrain {
 	public final static int ROTATING = 2;
 	public final static int TURNING = 3;
 	
+	public void init() {
+		rightEnc.reset();
+		leftEnc.reset();
+		rightEnc.start();
+		leftEnc.start();
+		//circumference = 19 inches
+		rightFrontController.setOutputRange(-1, 1);
+		leftFrontController.setOutputRange(-1, 1);
+		rightBackController.setOutputRange(-1, 1);
+		leftBackController.setOutputRange(-1, 1);
+		rightEnc.setDistancePerPulse(.0782);//(.07734);
+		leftEnc.setDistancePerPulse(.0813);//(.07849);
+		rightEnc.setPIDSourceParameter(PIDSource::kDistance);
+		leftEnc.setPIDSourceParameter(PIDSource::kDistance);
+		state = STOPPED;
+	}
+
+	
 	public void update() {
 	
 		//std::printf("Left Enc: %f\n",leftEnc.GetDistance()); 
@@ -55,26 +73,26 @@ public class Drivetrain {
 		switch (state) {
 	
 		case ROTATING:
-			double leftSpeed = min(max(-(targetSpeed + rotateSpeed), -1), 1);
-			double rightSpeed = min(max(targetSpeed - rotateSpeed, -1), 1);
-			leftFrontVic.Set(leftSpeed);
-			leftBackVic.Set(leftSpeed);
-			rightFrontVic.Set(rightSpeed);
-			rightBackVic.Set(rightSpeed);
+			double leftSpeed = Math.min(Math.max(-(targetSpeed + rotateSpeed), -1), 1);
+			double rightSpeed = Math.min(Math.max(targetSpeed - rotateSpeed, -1), 1);
+			leftFrontVic.set(leftSpeed);
+			leftBackVic.set(leftSpeed);
+			rightFrontVic.set(rightSpeed);
+			rightBackVic.set(rightSpeed);
 			break;
 	
 		case DRIVING:
-			//	double average = (rightEnc.GetDistance()+leftEnc.GetDistance())/2;
-			//		if(rightEnc.GetDistance() < abs(targetDist)){
-			//			std::printf("getting called right");
-			//			rightFrontVic.Set(0.3);
-			//			rightBackVic.Set(0.3);
-			//		}
-			//		if(leftEnc.GetDistance() < abs(targetDist)){
-			//			std::printf("getting called left");
-			//			leftFrontVic.Set(-0.3);
-			//			leftBackVic.Set(-0.3);
-			//		}
+			double average = (rightEnc.GetDistance()+leftEnc.GetDistance())/2;
+			if(rightEnc.GetDistance() < abs(targetDist)){
+				System.out.println("getting called right");
+				rightFrontVic.set(0.3);
+				rightBackVic.set(0.3);
+			}
+			if(leftEnc.GetDistance() < abs(targetDist)){
+				System.out.println("getting called left");
+				leftFrontVic.set(-0.3);
+				leftBackVic.set(-0.3);
+			}
 	
 	
 			break;

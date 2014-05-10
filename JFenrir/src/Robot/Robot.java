@@ -33,6 +33,7 @@ public class Robot {
     public void init(){
         driveTrain.init();
         shooter.init();
+        accumulator.init();
     }
 
     public void disable(){

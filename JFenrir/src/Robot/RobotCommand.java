@@ -27,18 +27,4 @@ public abstract class RobotCommand {
 	 * @param subsystem The subsystem that will run the command
 	 */
 	abstract void execute(Subsystem subsystem);
-	
-	public static class SetSpeedCommand extends RobotCommand {
-    	private int speed;
-        
-		public SetSpeedCommand(int speed) {
-        	this.speed = speed;
-        	subsystemType = DRIVETRAIN;
-        }
-        
-        @Override
-        public void execute() {
-            // Set the speed of the victors to the variable speed
-        }
-    }
 }

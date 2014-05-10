@@ -5,10 +5,50 @@
 
 package Robot;
 
+import edu.wpi.first.wpilibj.*;
+
 /**
  * Runs the accumulator
- * @author Paly Robotics
+ * @author 
  */
-public class Accumulator {
+public class Accumulator extends Subsytem{
+    
+    private Victor accuVic;
+    
+    private int state;
+    private static final int IDLE = 0, ACCUMULATING = 1, PASSING = 2; 
+    
+    public Accumulator(){
+        accuVic = new Victor(Constants.PORT_ACCUMULATOR_VIC_7);
+    }
+    
+    @Override
+    public void init(){
+        state = IDLE;
+    }
+    
+    @Override
+    public void disable(){
+        state = IDLE;
+    }
+    
+    @Override
+    public void update(){
+        switch (state){
+            case IDLE:
+                setAllVics(0.0);
+                break;
+            case ACCUMULATING:
+                accuVic.set(-1.0);
+                break;
+            case PASSING:
+                accuVic.set(1.0);
+                break;
+        }
+    }
+    
+    private void setAllVics(double spd){
+        accuVic.set(spd);
+    }
     
 }

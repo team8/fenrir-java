@@ -9,7 +9,8 @@ package Robot;
  * Runs the robot
  * @author Paly Robotics
  */
-public class Robot {
+public class Robot 
+{
 
     private Drivetrain drivetrain = new Drivetrain();
     private Shooter shooter = new Shooter();
@@ -17,27 +18,37 @@ public class Robot {
     private Rangefinder rangefinder = new Rangefinder();
     
 
-    public void update(){
+    public void update()
+    {
         accumulator.update();
         drivetrain.update();
         shooter.update();
         rangefinder.update();
     }
 
-    public void init(){
+    public void init()
+    {
         drivetrain.init();
         shooter.init();
         accumulator.init();
     }
 
+<<<<<<< HEAD
     public void disable(){
         drivetrain.disable();
+=======
+    public void disable()
+    {
+        drivetrain.setSpeed(0);
+>>>>>>> branch 'master' of https://github.com/team8/fenrir-java.git
         shooter.disable();
         accumulator.disable();
     }
     
-    public void relayCommand(RobotCommand command){
-        switch(command.subsystemType) {
+    public void relayCommand(RobotCommand command)
+    {
+        switch(command.subsystemType) 
+        {
             case RobotCommand.ACCUMULATOR:
                 command.execute(accumulator);
                 break;

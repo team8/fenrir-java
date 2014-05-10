@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.*;
 /**
  * Main method?
  * 
- * @author Nihar Mitra
+ * @author Neelay Junnarkar
  * @author Rafi Long
  */
 public class JFenrir extends IterativeRobot {
@@ -92,7 +92,7 @@ public class JFenrir extends IterativeRobot {
 	}
 
 	/**
-	 * Initializes the robot for teloep
+	 * Initializes the robot for teleop
 	 * @see Robot#init()
 	 */
 	public void teleopInit() {

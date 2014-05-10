@@ -11,15 +11,13 @@ import edu.wpi.first.wpilibj.*;
  * Runs the drivetrain
  * @author Paly Robotics
  */
-public class Drivetrain {
+public class Drivetrain extends Subsystem {
 	
 	// Victors 
 	private Victor leftFrontVic;
 	private Victor leftBackVic;
 	private Victor rightFrontVic;
 	private Victor rightBackVic;
-
-	//Gyro gyroscope;
 
 	private Encoder leftEnc;
 	private Encoder rightEnc;
@@ -28,12 +26,11 @@ public class Drivetrain {
 	private PIDController rightFrontController;
 	private PIDController leftBackController;
 	private PIDController rightBackController;
-	//PIDController angleController;
+
 
 	//target speeds 
 	private double targetSpeed;
 	private double rotateSpeed;
-	private double rotateAngle;
 	private double targetDist;
 
 	// For testing
@@ -42,10 +39,9 @@ public class Drivetrain {
 	
 	//state 
 	private int state;
-	public final static int STOPPED = 0;
-	public final static int DRIVING = 1;
-	public final static int ROTATING = 2;
-	public final static int TURNING = 3;
+	public final static int IDLE = 0;
+	public final static int AUTO_DRIVING = 1;
+	public final static int TELE_DRIVING = 2;
 	
 	public void init() {
 		rightEnc.reset();
@@ -61,92 +57,60 @@ public class Drivetrain {
 		leftEnc.setDistancePerPulse(.0813);//(.07849);
 		rightEnc.setPIDSourceParameter(PIDSource.kDistance);
 		leftEnc.setPIDSourceParameter(PIDSource.kDistance);
-		state = STOPPED;
+		state = IDLE;
 	}
 
 	
 	public void update() {
 	
-		//std::printf("Left Enc: %f\n",leftEnc.GetDistance()); 
-		//std::printf("Right Enc: %f\n",rightEnc.GetDistance());
-	
 		switch (state) {
-	
-		case ROTATING:
-			double leftSpeed = Math.min(Math.max(-(targetSpeed + rotateSpeed), -1), 1);
-			double rightSpeed = Math.min(Math.max(targetSpeed - rotateSpeed, -1), 1);
-			leftFrontVic.set(leftSpeed);
-			leftBackVic.set(leftSpeed);
-			rightFrontVic.set(rightSpeed);
-			rightBackVic.set(rightSpeed);
-			break;
-	
-		case DRIVING:
-			double average = (rightEnc.getDistance()+leftEnc.getDistance())/2;
-			if(rightEnc.getDistance() < Math.abs(targetDist)){
-				System.out.println("getting called right");
-				rightFrontVic.set(0.3);
-				rightBackVic.set(0.3);
-			}
-			if(leftEnc.getDistance() < Math.abs(targetDist)){
-				System.out.println("getting called left");
-				leftFrontVic.set(-0.3);
-				leftBackVic.set(-0.3);
-			}
-	
-	
-			break;
-	
-		case TURNING:
-			//		leftFrontVic.Set(-(angleController.Get()));
-			//		leftBackVic.Set(-(angleController.Get()));
-			//		rightFrontVic.Set(angleController.Get());
-			//		rightBackVic.Set(angleController.Get());
-			break;
-	
-		case STOPPED:
-			leftFrontVic.set(0);
-			leftBackVic.set(0);
-			rightFrontVic.set(0);
-			rightBackVic.set(0);
-			break;
+			case TELE_DRIVING:
+				double leftSpeed = Math.min(Math.max(-(targetSpeed + rotateSpeed), -1), 1);
+				double rightSpeed = Math.min(Math.max(targetSpeed - rotateSpeed, -1), 1);
+				leftFrontVic.set(leftSpeed);
+				leftBackVic.set(leftSpeed);
+				rightFrontVic.set(rightSpeed);
+				rightBackVic.set(rightSpeed);
+				break;
+			case AUTO_DRIVING:
+				double average = (rightEnc.getDistance()+leftEnc.getDistance())/2;
+				if(rightEnc.getDistance() < Math.abs(targetDist)){
+					System.out.println("getting called right");
+					rightFrontVic.set(0.3);
+					rightBackVic.set(0.3);
+				}
+				if(leftEnc.getDistance() < Math.abs(targetDist)){
+					System.out.println("getting called left");
+					leftFrontVic.set(-0.3);
+					leftBackVic.set(-0.3);
+				}
+				break;
+			case IDLE:
+				setAllVics(0.0);
+				break;
 		}
+	}
+	
+	public void disable(){
+		state = IDLE;
 	}
 	
 	public void setSpeed(double spd) {
 		targetSpeed = spd;
-		state = ROTATING;
+		state = TELE_DRIVING;
 	}
-
-	public void rotateA(double angle) {
-		//	gyroscope.Reset();
-		//	angleController.SetSetpoint(angle);
-		//	angleController.Enable();
-		//	rotateAngle = angle;
-		state = TURNING;
-	}
-
 	
 	public void rotateS(double speed) {
 		rotateSpeed = speed;
-		state = ROTATING;
+		state = TELE_DRIVING;
 	}
 
-
-	public void stopVictors() {
-		state = STOPPED;
+	private void setAllVics(double spd){
+		leftFrontVic.set(-spd);
+		leftBackVic.set(-spd);
+		rightFrontVic.set(spd);
+		rightBackVic.set(spd);
 	}
-
-
-	public double getRightEnc() {
-		return rightEnc.getDistance();
-	}
-
-
-	public double getLeftEnc() {
-		return leftEnc.getDistance();
-	}
-
 	
 	public static abstract class DrivetrainCommand extends RobotCommand {
 		public DrivetrainCommand() {
@@ -167,4 +131,6 @@ public class Drivetrain {
 			// Set the speed of the victors to the variable speed
 		}
 	}
+
+
 }

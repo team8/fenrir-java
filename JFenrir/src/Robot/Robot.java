@@ -31,7 +31,7 @@ public class Robot {
     }
 
     public void disable(){
-        drivetrain.setSpeed(0);
+        drivetrain.disable();
         shooter.disable();
         accumulator.disable();
     }

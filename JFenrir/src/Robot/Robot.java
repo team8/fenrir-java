@@ -11,7 +11,7 @@ package Robot;
  */
 public class Robot {
 
-    private Drivetrain driveTrain;
+    private Drivetrain drivetrain;
     private Shooter shooter;
     private Accumulator accumulator;
     private Rangefinder rangefinder;
@@ -25,7 +25,7 @@ public class Robot {
 
     public void update(){
         accumulator.update();
-        driveTrain.update();
+        drivetrain.update();
         shooter.update();
         rangefinder.update();
     }
@@ -44,16 +44,16 @@ public class Robot {
     public void relayCommand(RobotCommand command){
         switch(command.subsystemType) {
             case RobotCommand.ACCUMULATOR:
-                accumulator.runCommand(command);
+                command.execute(accumulator);
                 break;
             case RobotCommand.DRIVETRAIN:
-                driveTrain.runCommand(command);
+                command.execute(drivetrain);
                 break;
             case RobotCommand.RANGEFINDER:
-                rangefinder.runCommand(command);
+                command.execute(rangefinder);
                 break;
             case RobotCommand.SHOOTER:
-                shooter.runCommand(command);
+                command.execute(shooter);
                 break;
         }
     }

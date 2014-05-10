@@ -30,6 +30,10 @@ public abstract class RobotCommand {
 		return subsystemType;
 	}
 	
+	public void setSubsystemType(int subsytemType) {
+		this.subsystemType = subsystemType;
+	}
+	
 	/**
 	 * Execute is a method that carries out a certain task that the command is supposed to do.
 	 * Default method only runs when wrong subsystem is used, and throws IllegalArgumentException.

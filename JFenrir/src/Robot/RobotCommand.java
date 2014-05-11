@@ -14,7 +14,7 @@ public abstract class RobotCommand {
 	private int subsystemType;
 	
 	/**
-	 * Numbers that represent each subsystem.
+	 * Pseudo-enum to represent each subsystem.
 	 */
 	public static final int ACCUMULATOR = 0;
 	public static final int DRIVETRAIN = 1;
@@ -40,8 +40,7 @@ public abstract class RobotCommand {
 	 * 
 	 * @param subsystem The subsystem that will run the command
 	 */
-	public void execute(Subsystem subsystem)
-	{
+	public void execute(Subsystem subsystem) {
 		throw new IllegalArgumentException("The wrong subsystem type was used.");
 	}
 }

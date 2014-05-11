@@ -9,7 +9,9 @@ import edu.wpi.first.wpilibj.*;
 
 /**
  * Runs the drivetrain
- * @author Paly Robotics
+ * @author Neelay Junnarkar
+ * @author Ben cw
+ * @author Johnny Zw;jfisa
  */
 public class Drivetrain extends Subsystem {
 	
@@ -60,6 +62,9 @@ public class Drivetrain extends Subsystem {
 		state = IDLE;
 	}
 
+	public void disable(){
+		state = IDLE;
+	}
 	
 	public void update() {
 	
@@ -90,17 +95,13 @@ public class Drivetrain extends Subsystem {
 				break;
 		}
 	}
-	
-	public void disable(){
-		state = IDLE;
-	}
-	
-	public void setSpeed(double spd) {
+
+	private void setSpeed(double spd) {
 		targetSpeed = spd;
 		state = TELE_DRIVING;
 	}
 	
-	public void rotateS(double speed) {
+	private void rotateS(double speed) {
 		rotateSpeed = speed;
 		state = TELE_DRIVING;
 	}
@@ -113,6 +114,8 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public static abstract class DrivetrainCommand extends RobotCommand {
+		protected final double speed;
+		
 		public DrivetrainCommand() {
 			setSubsystemType(DRIVETRAIN);
 		}
@@ -121,14 +124,25 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public static class SetSpeedCommand extends DrivetrainCommand {
-		private int speed;
 		
-		public SetSpeedCommand(int speed) {
+		public SetSpeedCommand(double speed) {
 			this.speed = speed;
 		}
 		
 		public void execute(Drivetrain drivetrain) {
 			// Set the speed of the victors to the variable speed
+			drivetrain.setSpeed(speed);
+		}
+	}
+	
+	public static class SetRotateCommand extends DrivetrainCommand {
+		
+		public SetRotateCommand(double speed){
+			this.speed = speed;
+		}
+		
+		public void execute(Drivetrain drivetrain){
+			drivetrain.rotateS(speed);
 		}
 	}
 

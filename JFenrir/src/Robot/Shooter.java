@@ -53,23 +53,19 @@ public class Shooter extends Subsystem {
                 setAllVics(0.0);
                 break;
             case PREPARING:
-                if (!shootTimer.hasPassedPeriod(3.0))
-                {
+                if (!shootTimer.hasPassedPeriod(3.0)){
                     setShooterVics(1.0);
                 }
-                else
-                {
+                else{
                     state = FIRING;
                     shootTimer.reset();
                 }
                 break;
             case FIRING:
-                if (!shootTimer.hasPeriodPassed(3.0))
-                {
+                if (!shootTimer.hasPeriodPassed(3.0)){
                 	loaderVic.set(Constants.LOAD_SPEED);
                 }
-                else
-                {
+                else{
                 	state = IDLE;
                 }   
                 break;

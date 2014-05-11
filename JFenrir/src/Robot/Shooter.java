@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.*;
  * Runs the shooter
  * @author Neelay Junnarkar
  */
-public class Shooter extends Subsystem
-{
+public class Shooter extends Subsystem {
 
     private int state;
     
@@ -28,8 +27,7 @@ public class Shooter extends Subsystem
     private Timer shootTimer;
     
     
-    public Shooter()
-    {
+    public Shooter(){
         
         shooterVic1 = new Victor(Constants.PORT_SHOOTER_VIC_1);
         shooterVic2 = new Victor(Constants.PORT_SHOOTER_VIC_2);
@@ -41,20 +39,16 @@ public class Shooter extends Subsystem
         
     }
     
-    public void init()
-    {
+    public void init(){
         state = IDLE;
     }
     
-    public void disable()
-    {
+    public void disable() {
         state = IDLE;
     }
     
-    public void update()
-    {
-        switch (state)
-        {
+    public void update(){
+        switch (state){
             case IDLE:
                 setAllVics(0.0);
                 break;
@@ -94,8 +88,7 @@ public class Shooter extends Subsystem
         }
     }
     
-    private void setAllVics(double spd)
-    {
+    private void setAllVics(double spd){
         shooterVic1.set(-spd);
         shooterVic2.set(-spd);
         shooterVic3.set(spd);
@@ -103,71 +96,58 @@ public class Shooter extends Subsystem
         loaderVic.set(-spd);
     }
     
-    private void setShooterVics(double spd)
-    {
+    private void setShooterVics(double spd){
         shooterVic1.set(-spd);
         shooterVic2.set(-spd);
         shooterVic3.set(spd);
         shooterVic4.set(spd);
     }
     
-    public static class EjectCommand extends RobotCommand 
-    {
+    public static class EjectCommand extends RobotCommand {
     	subsystemType = SHOOTER;
     	
-    	void execute(Shooter shooter)
-    	{
+    	void execute(Shooter shooter){
     		shooter.state = EJECTING;
     	}
     }
     
-    public static class SetIdleCommand extends RobotCommand 
-    {
+    public static class SetIdleCommand extends RobotCommand {
     	subsystemType = SHOOTER;
     	
-    	void execute(Shooter shooter)
-    	{
+    	void execute(Shooter shooter){
     		shooter.state = IDLE;
     	}
     }
     
-    public static class FlushCommand extends RobotCommand 
-    {
+    public static class FlushCommand extends RobotCommand {
     	subsystemType = SHOOTER;
     	
-    	void execute(Shooter shooter)
-    	{
+    	void execute(Shooter shooter){
     		shooter.state = FLUSHING;
     	}
     }
     
-    public static class FireCommand extends RobotCommand 
-    {
+    public static class FireCommand extends RobotCommand {
     	subsystemType = SHOOTER;
     	
-    	void execute(Shooter shooter)
-    	{
+    	void execute(Shooter shooter){
     		shooter.shootTimer.reset();
     		shooter.state = PREPARING;
     	}
     }
     
-    public static class ManualPrepareCommand extends RobotCommand 
-    {
+    public static class ManualPrepareCommand extends RobotCommand {
     	subsystemType = SHOOTER;
     	
-    	void execute(Shooter shooter)
-    	{
+    	void execute(Shooter shooter){
     		shooter.state = MANUAL_PREPARING;
     	}
     }
     
-    public static class ManualFireCommand extends RobotCommand 
-    {
+    public static class ManualFireCommand extends RobotCommand {
     	subsystemType = SHOOTER;
     	
-    	void execute(Shooter shooter)
-    	{
+    	void execute(Shooter shooter) {
     		shooter.state = MANUAL_FIRING;
     	}
     }

@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.*;
  * Main method?
  * 
  * @author Neelay Junnarkar
- * @author jdoc Rafi Long
  */
 public class JFenrir extends IterativeRobot {
 

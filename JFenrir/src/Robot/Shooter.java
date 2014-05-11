@@ -27,7 +27,7 @@ public class Shooter extends Subsystem {
     private Timer shootTimer;
     
     
-    public Shooter(){
+    public Shooter() {
         
         shooterVic1 = new Victor(Constants.PORT_SHOOTER_VIC_1);
         shooterVic2 = new Victor(Constants.PORT_SHOOTER_VIC_2);
@@ -39,7 +39,7 @@ public class Shooter extends Subsystem {
         
     }
     
-    public void init(){
+    public void init() {
         state = IDLE;
     }
     
@@ -47,44 +47,44 @@ public class Shooter extends Subsystem {
         state = IDLE;
     }
     
-    public void update(){
-        switch (state){
-            case IDLE:
-                setAllVics(0.0);
-                break;
-            case PREPARING:
-                if (!shootTimer.hasPassedPeriod(3.0)){
-                    setShooterVics(1.0);
-                }
-                else{
-                    state = FIRING;
-                    shootTimer.reset();
-                }
-                break;
-            case FIRING:
-                if (!shootTimer.hasPeriodPassed(3.0)){
-                	loaderVic.set(Constants.LOAD_SPEED);
-                }
-                else{
-                	state = IDLE;
-                }   
-                break;
-            case EJECTING:
-                loaderVic.set(1);
-                break;
-            case FLUSHING:
-                setAllVics(-0.3);
-                break;
-            case MANUAL_FIRING:
+    public void update() {
+        switch (state) {
+        case IDLE:
+            setAllVics(0.0);
+            break;
+        case PREPARING:
+            if (!shootTimer.hasPassedPeriod(3.0)) {
+                setShooterVics(1.0);
+            }
+            else {
+                state = FIRING;
+                shootTimer.reset();
+            }
+            break;
+        case FIRING:
+            if (!shootTimer.hasPeriodPassed(3.0)){
             	loaderVic.set(Constants.LOAD_SPEED);
-            	break;
-            case MANUAL_PREPARING:
-            	setShooterVics(1.0);
-            	break;
+            }
+            else {
+            	state = IDLE;
+            }   
+            break;
+        case EJECTING:
+            loaderVic.set(1);
+            break;
+        case FLUSHING:
+            setAllVics(-0.3);
+            break;
+        case MANUAL_FIRING:
+            loaderVic.set(Constants.LOAD_SPEED);
+            break;
+        case MANUAL_PREPARING:
+            setShooterVics(1.0);
+            break;
         }
     }
     
-    private void setAllVics(double spd){
+    private void setAllVics(double spd) {
         shooterVic1.set(-spd);
         shooterVic2.set(-spd);
         shooterVic3.set(spd);
@@ -92,7 +92,7 @@ public class Shooter extends Subsystem {
         loaderVic.set(-spd);
     }
     
-    private void setShooterVics(double spd){
+    private void setShooterVics(double spd) {
         shooterVic1.set(-spd);
         shooterVic2.set(-spd);
         shooterVic3.set(spd);
@@ -147,5 +147,4 @@ public class Shooter extends Subsystem {
     		shooter.state = MANUAL_FIRING;
     	}
     }
-    
 }

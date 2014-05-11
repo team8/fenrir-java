@@ -10,17 +10,18 @@ import edu.wpi.first.wpilibj.*;
 /**
  * Runs the drivetrain
  * @author Neelay Junnarkar
- * @author Ben cw
- * @author Johnny Zw;jfisa
+ * @author Benjamin Cohen-Wang
+ * @author Jonathan Zwiebel
  */
 public class Drivetrain extends Subsystem {
 	
-	// Victors 
+	// Victors
 	private Victor leftFrontVic;
 	private Victor leftBackVic;
 	private Victor rightFrontVic;
 	private Victor rightBackVic;
 
+	//Encoders and PID Controllers
 	private Encoder leftEnc;
 	private Encoder rightEnc;
 
@@ -29,36 +30,38 @@ public class Drivetrain extends Subsystem {
 	private PIDController leftBackController;
 	private PIDController rightBackController;
 
-
-	//target speeds 
+	//Variables for the commands
 	private double targetSpeed;
 	private double rotateSpeed;
 	private double targetDist;
 
-	// For testing
+	// For testing what?
 	private double prevLeftDist;
 	private double prevRightDist;
 	
-	//state 
+	//Enum for the states
 	private int state;
 	public final static int IDLE = 0;
 	public final static int AUTO_DRIVING = 1;
 	public final static int TELE_DRIVING = 2;
 	
 	public void init() {
+		//Reset Encoders
 		rightEnc.reset();
 		leftEnc.reset();
 		rightEnc.start();
 		leftEnc.start();
-		//circumference = 19 inches
+		/*circumference of wheel= 19 inches*/
+		//Calibrate encoders
 		rightFrontController.setOutputRange(-1, 1);
 		leftFrontController.setOutputRange(-1, 1);
 		rightBackController.setOutputRange(-1, 1);
 		leftBackController.setOutputRange(-1, 1);
-		rightEnc.setDistancePerPulse(.0782);//(.07734);
-		leftEnc.setDistancePerPulse(.0813);//(.07849);
+		rightEnc.setDistancePerPulse(.0782);
+		leftEnc.setDistancePerPulse(.0813);
 		rightEnc.setPIDSourceParameter(PIDSource.kDistance);
 		leftEnc.setPIDSourceParameter(PIDSource.kDistance);
+		
 		state = IDLE;
 	}
 
@@ -79,12 +82,12 @@ public class Drivetrain extends Subsystem {
 				break;
 			case AUTO_DRIVING:
 				double average = (rightEnc.getDistance()+leftEnc.getDistance())/2;
-				if(rightEnc.getDistance() < Math.abs(targetDist)){
+				if(rightEnc.getDistance() < Math.abs(targetDist)) {
 					System.out.println("getting called right");
 					rightFrontVic.set(0.3);
 					rightBackVic.set(0.3);
 				}
-				if(leftEnc.getDistance() < Math.abs(targetDist)){
+				if(leftEnc.getDistance() < Math.abs(targetDist)) {
 					System.out.println("getting called left");
 					leftFrontVic.set(-0.3);
 					leftBackVic.set(-0.3);
@@ -106,7 +109,7 @@ public class Drivetrain extends Subsystem {
 		state = TELE_DRIVING;
 	}
 
-	private void setAllVics(double spd){
+	private void setAllVics(double spd) {
 		leftFrontVic.set(-spd);
 		leftBackVic.set(-spd);
 		rightFrontVic.set(spd);
@@ -145,6 +148,4 @@ public class Drivetrain extends Subsystem {
 			drivetrain.rotateS(speed);
 		}
 	}
-
-
 }

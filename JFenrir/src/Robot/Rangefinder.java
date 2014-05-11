@@ -50,7 +50,6 @@ public class Rangefinder extends Subsystem {
 	    // Send a command to drivetrain
 	}
     
-    	@Override
 	public void update() {
 	    switch (state) {
 	    	case IDLE:

@@ -9,7 +9,8 @@ import edu.wpi.first.wpilibj.*;
 
 /**
  * Runs the accumulator subsystem
- * @author 
+ * 
+ * @author Neelay Junnarkar
  */
 public class Accumulator extends Subsystem {
 	
@@ -49,7 +50,7 @@ public class Accumulator extends Subsystem {
 	}
 	
 	public static class AccumulateCommand extends RobotCommand {
-		subsystemType = ACCUMULATOR;
+		setSubsystemType(ACCUMULATOR);
 		
 		void execute(Accumulator accu){
 			accu.state = ACCUMULATING;
@@ -57,7 +58,7 @@ public class Accumulator extends Subsystem {
 	}
     
 	public static class PassCommand extends RobotCommand {
-		subsystemType = ACCUMULATOR;
+		setSubsystemType(ACCUMULATOR);
 		
 		void execute(Accumulator accu){
 			accu.state = PASSING;
@@ -65,7 +66,7 @@ public class Accumulator extends Subsystem {
     }
     
 	public static class FlushCommand extends RobotCommand {
-		subsystemType = ACCUMULATOR;
+		setSubsystemType(ACCUMULATOR);
 		
 		void execute(Accumulator accu){
 			accu.state = PASSING;
@@ -73,7 +74,7 @@ public class Accumulator extends Subsystem {
 	}
 	
 	public static class SetIdleCommand extends RobotCommand {
-		subsystemType = ACCUMULATOR;
+		setSubsystemType(ACCUMULATOR);
 		
 		void execute(Accumulator accu){
 			accu.state = IDLE;

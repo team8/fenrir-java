@@ -17,6 +17,9 @@ public class Accumulator extends Subsystem {
 	private Victor accuVic;
 	
 	private int state;
+	public void setState(int state){ this.state = state; }
+	public int getState(){ return state; }
+	
 	private static final int IDLE = 0, ACCUMULATING = 1, PASSING = 2; 
 	
 	public Accumulator() {
@@ -53,7 +56,7 @@ public class Accumulator extends Subsystem {
 		setSubsystemType(ACCUMULATOR);
 		
 		void execute(Accumulator accu){
-			accu.state = ACCUMULATING;
+			accu.setState(ACCUMULATING);
 		}
 	}
     
@@ -61,7 +64,7 @@ public class Accumulator extends Subsystem {
 		setSubsystemType(ACCUMULATOR);
 		
 		void execute(Accumulator accu){
-			accu.state = PASSING;
+			accu.setState(PASSING);
 		}
     }
     
@@ -69,7 +72,7 @@ public class Accumulator extends Subsystem {
 		setSubsystemType(ACCUMULATOR);
 		
 		void execute(Accumulator accu){
-			accu.state = PASSING;
+			accu.setState(PASSING);
 		}
 	}
 	
@@ -77,7 +80,7 @@ public class Accumulator extends Subsystem {
 		setSubsystemType(ACCUMULATOR);
 		
 		void execute(Accumulator accu){
-			accu.state = IDLE;
+			accu.setState(IDLE);
 		}
 	}
 }

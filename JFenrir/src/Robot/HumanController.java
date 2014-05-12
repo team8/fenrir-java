@@ -19,6 +19,9 @@ public class HumanController
 
 
 	public HumanController(Robot robot) {
+		speedStick = new Joystick(Constants.PORT_SPEED);
+		turnStick = new Joystick(Constants.PORT_TURN);
+		operatorStick = new Joystick(Constants.PORT_OPERATOR);
 		prevStop = false;
 		prevZ = false;
 		manualState = false;
@@ -86,7 +89,7 @@ public class HumanController
 			prevZ = true;
 		}
 		else if(manualState == true) {
-			std::printf("is in manual\n");
+			System.out.println("is in manual\n");
 			robot.relayCommand(new Shooter.ManualFireCommand());
 			
 			if(getShootButton()) {
@@ -107,39 +110,39 @@ public class HumanController
 	}
 
 	private double getAbsSpeedStick(){
-		double speed = abs(speedStick.GetY());
+		double speed = abs(speedStick.getY());
 		return speed;
 	}
 
 	private double getAbsTurnStick() {
-		double turn = abs(turnStick.GetX());
+		double turn = abs(turnStick.getX());
 		return turn;
 	}
 
 	private double getAccumulatorStick() {
-		return operatorStick.GetY(); // For adjusting the accumulator with Operator stick
+		return operatorStick.getY(); // For adjusting the accumulator with Operator stick
 	}
 	
 	private double getAccumulator() {
 		//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
-		return operatorStick.GetY(); // For testing purposes
+		return operatorStick.getY(); // For testing purposes
 	}
 	
 	private boolean getShootButton() {
 		// Get trigger button to shoot from Operator stick
 		// return false;
-		return operatorStick.GetRawButton((uint_t)3);
+		return operatorStick.getRawButton((uint_t)3);
 	}
 	
 	private boolean getFlushTrigger() {
 		//flush out the ball
-		return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
+		return operatorStick.getRawButton((uint32_t)FLUSH_TRIGGER);
 	}
 	private double getManualButton() {
-		return operatorStick.GetRawButton((uint32_t)5);
+		return operatorStick.getRawButton((uint32_t)5);
 	}
 	private boolean getRangeButton() {
-		return operatorStick.GetRawButton((uint32_t)4);
+		return operatorStick.getRawButton((uint32_t)4);
 	}	
 	private void toggleManualState() {
 		if(manualState) {

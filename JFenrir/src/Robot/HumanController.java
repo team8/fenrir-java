@@ -14,11 +14,14 @@ public class HumanController
 	private boolean prevRangeButton;
 	private boolean prevStop;
 	private boolean prevZ;
+	private boolean prevManualButton;
+	private boolean manualState;
 
 
 	public HumanController(Robot robot) {
 		prevStop = false;
 		prevZ = false;
+		manualState = false;
 		this.robot = robot;
 	}
 
@@ -70,7 +73,10 @@ public class HumanController
 		}
 		
 		/*SHOOTER*/
-		if(getOperatorZ() < 0.5) {
+		if(getManualButton() && !prevManualButton) {
+			toggleManualState();
+		}
+		if(manualState == false) {
 			if(shootButtonPrev!=getShootButton() && getShootButton()) {
 				robot.relayCommand(new Shooter.FireCommand());
 			}
@@ -79,7 +85,7 @@ public class HumanController
 			}
 			prevZ = true;
 		}
-		else if(getOperatorZ() > 0.5) {
+		else if(manualState == true) {
 			std::printf("is in manual\n");
 			robot.relayCommand(new Shooter.ManualFireCommand());
 			
@@ -88,6 +94,8 @@ public class HumanController
 			}
 			prevZ = false;
 		}
+		
+		/*RANGEFINDER*/
 		if(!prevRangeButton && getRangeButton()){
 			robot.relayCommand(new Rangefinder.FindDistCommand());
 		}	
@@ -95,6 +103,7 @@ public class HumanController
 		shootButtonPrev = getShootButton();
 		lastFlushTrigger = getFlushTrigger();
 		prevRangeButton = getRangeButton();
+		prevManualButton = getManualButton();
 	}
 
 	private double getAbsSpeedStick(){
@@ -126,10 +135,18 @@ public class HumanController
 		//flush out the ball
 		return operatorStick.GetRawButton((uint32_t)FLUSH_TRIGGER);
 	}
-	private double getOperatorZ() {
-		return operatorStick.GetThrottle();
+	private double getManualButton() {
+		return operatorStick.GetRawButton((uint32_t)5);
 	}
 	private boolean getRangeButton() {
 		return operatorStick.GetRawButton((uint32_t)4);
 	}	
+	private void toggleManualState() {
+		if(manualState) {
+			manualState = false;
+		}
+		else {
+			manualState = true;
+		}
+	}
 }

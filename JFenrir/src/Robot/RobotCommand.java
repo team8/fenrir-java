@@ -14,7 +14,7 @@ public abstract class RobotCommand {
 	public final int subsystemType;
 	
 	/**
-	 * Numbers that represent each sumbsystem.
+	 * Numbers that represent each subsystem.
 	 */
 	public static final int ACCUMULATOR = 0;
 	public static final int DRIVETRAIN = 1;

@@ -110,12 +110,12 @@ public class HumanController
 	}
 
 	private double getAbsSpeedStick(){
-		double speed = abs(speedStick.getY());
+		double speed = Math.abs(speedStick.getY());
 		return speed;
 	}
 
 	private double getAbsTurnStick() {
-		double turn = abs(turnStick.getX());
+		double turn = Math.abs(turnStick.getX());
 		return turn;
 	}
 

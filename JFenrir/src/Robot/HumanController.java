@@ -1,127 +1,155 @@
-/*
- * See JFenrir.java for documentation
- * Coded by the 2013-14 Paly Robotics Programming Team
- */
+public class HumanController
+{
+	private Robot robot;
+	private Joystick speedStick;
+	private Joystick turnStick;
+	private Joystick operatorStick;
 
-package Robot;
+	//booleans used to make sure we don't reissue same command
+	private boolean accuButtonPrev;
+	private boolean shootButtonPrev;
+	private boolean warmupButtonPrev;
+	private boolean passButtonPrev;
+	private boolean lastFlushTrigger;
+	private boolean prevRangeButton;
+	private boolean prevStop;
+	private boolean prevZ;
+	private boolean prevManualButton;
+	private boolean manualState;
 
-import edu.wpi.first.wpilibj.*;
 
-/**
- * Human controller
- * @author Paly Robotics
- */
-public class HumanController {
-    
-    Joystick speedStick;
-    Joystick turnStick;
-    Joystick operatorStick;
-    boolean accuButtonPrev;
-    boolean shootButtonPrev;
-    boolean flushTriggerPrev;
-    boolean accumPrev;
-    boolean manualPrev;
-    boolean prevZ;
-    Robot bot;
-    
-    public HumanController(Robot robot) {
+	public HumanController(Robot robot) {
+		speedStick = new Joystick(Constants.PORT_SPEED);
+		turnStick = new Joystick(Constants.PORT_TURN);
+		operatorStick = new Joystick(Constants.PORT_OPERATOR);
+		prevStop = false;
+		prevZ = false;
+		manualState = false;
+		this.robot = robot;
+	}
 
-         //fill constructors of Joystick 
-        speedStick = new Joystick();
-        turnStick = new Joystick();
-        operatorStick = new Joystick();
-        accumPrev = false;
-        manualPrev = false;
-        prevZ = true;
-        bot = robot;
-    }
-    public void update() {
-        /*SLIGHT MOVEMENT WITHOUT TURNING*/
-        if(Math.abs(getTurnStick()) <= 0.1 && Math.abs(getSpeedStick()) <= 0.1) {
-            //command for speedstick y to drive
-            
-            //command rot speed 0
-        }
-        /*FULL MOVEMENT*/
-        if(Math.abs(getSpeedStick()) > 0.1) {
-            // command for speedstick y to drive
-        }
-        if(Math.abs(getTurnStick()) > 0.1) {
-            // command for turnstick x to drive
-        }
-        /*ACCUMULATOR*/
-        //fix logic
-        if(getAccumY() < -0.2) {
-            //accumulate AND SET LOADER WHEELS DEAD ONCE
-            accumPrev = false;
-        }
-        else if(getAccumY() > 0.2) {
-            // command to eject loader wheels
-            
-            //command to pass accum
-            accumPrev = false;
-        }
-        else {
-            //stop accum
-            if(!accumPrev) {
-                //shooter idle
-            }
-        }
-        /*FLUSHING*/
-        if(getFlushTrigger()) {
-            //command to flush accum
-            
-            //command to flush shooter
-        }
-        else if(!getFlushTrigger() && flushTriggerPrev) {
-            //command accum stop
-            
-            //command to shooter stop
-        }
-        /*SHOOTER*/
-        if(getOperatorZ() < 0.5) {
-            if(shootButtonPrev != getShootButton() && getShootButton()) {
-                //command to shoot
-            }
-            else if(!prevZ) {
-                //command to idle shooter
-                prevZ = true;
-            }
-        }
-        else if(getOperatorZ() > 0.5) {
-            //command to manual speed up
-            if(getShootButton()) {
-                //command to manual load
-            }
-            prevZ = false;
-        }
-    }
-    //check official names of getters
-    private double getSpeedStick() {
-        double speed = speedStick.getY();
-        return speed;
-    }
-    private double getTurnStick() {
-        double turn = turnStick.getX();
-        return turn;
-    }
-    private double getAccumY() {
-        double accum = operatorStick.getY();
-        return accum;
-    }
-    private boolean getShootButton() {
-        boolean button = operatorStick.getTrigger();
-        return button;
-    }
-    private boolean getFlushTrigger() {
-        //add button ports here
-        boolean button = operatorStick.getRawButton();
-        return button;
-    }
-    private double getOperatorZ() {
-        double zVal = operatorStick.getZ();
-        return zVal;
-        
-    }
-    
+	public void update() {
+
+		/*SLIGHT MOVEMENT*/
+		if(getAbsTurnStick()<=.1 && getAbsSpeedStick()<=.1) {
+			robot.relayCommand(new Drivetrain.SetSpeedCommand(0));
+			robot.relayCommand(new Drivetrain.SetRotateCommand(0));
+		}
+
+		/*FULL MOVEMENT*/
+		if(getAbsSpeedStick()>0.1) {
+			robot.relayCommand(new Drivetrain.SetSpeedCommand(speedStick.getY()));
+		}
+		if(getAbsTurnStick()>0.1) {
+			robot.relayCommand(new Drivetrain.SetRotateCommand(rotStick.getX()));
+		}
+
+		/*ACCUMULATOR*/
+		if(getAccumulator()<-0.2) {
+			System.out.print("accumulating\n");
+			robot.relayCommand(new Accumulator.StartAccumulatingCommand());
+			prevStop = false;
+		}
+		else if(getAccumulator()>0.2) {
+			robot.relayCommand(new Shooter.EjectCommand());
+			robot.relayCommand(new Accumulator.EjectCommand());
+			prevStop = false;
+		}
+		else {
+			robot.relayCommand(new Accumulator.StopCommand());
+			if(!prevStop) {
+				robot.relayCommand(new Shooter.IdleCommand());
+			}
+			prevStop = true;
+		}
+
+		/*FLUSHING*/
+		if (getFlushTrigger()) {
+			robot.relayCommand(new Accumulator.FlushCommand());
+			robot.relayCommand(new Shooter.IdleCommand());
+			robot.relayCommand(new Accumulator.StopCommand());
+			robot.relayCommand(new Shooter.StopCommand());
+			robot.relayCommand(new Shooter.FlushCommand());
+		}
+		else if (!getFlushTrigger() && lastFlushTrigger) {
+			
+		}
+		
+		/*SHOOTER*/
+		if(getManualButton() && !prevManualButton) {
+			toggleManualState();
+		}
+		if(manualState == false) {
+			if(shootButtonPrev!=getShootButton() && getShootButton()) {
+				robot.relayCommand(new Shooter.FireCommand());
+			}
+			else if (!prevZ) {
+				
+			}
+			prevZ = true;
+		}
+		else if(manualState == true) {
+			System.out.println("is in manual\n");
+			robot.relayCommand(new Shooter.ManualFireCommand());
+			
+			if(getShootButton()) {
+				robot.relayCommand(new Shooter.ManualCommand());
+			}
+			prevZ = false;
+		}
+		
+		/*RANGEFINDER*/
+		if(!prevRangeButton && getRangeButton()){
+			robot.relayCommand(new Rangefinder.FindDistCommand());
+		}	
+		
+		shootButtonPrev = getShootButton();
+		lastFlushTrigger = getFlushTrigger();
+		prevRangeButton = getRangeButton();
+		prevManualButton = getManualButton();
+	}
+
+	private double getAbsSpeedStick(){
+		double speed = Math.abs(speedStick.getY());
+		return speed;
+	}
+
+	private double getAbsTurnStick() {
+		double turn = Math.abs(turnStick.getX());
+		return turn;
+	}
+
+	private double getAccumulatorStick() {
+		return operatorStick.getY(); // For adjusting the accumulator with Operator stick
+	}
+	
+	private double getAccumulator() {
+		//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
+		return operatorStick.getY(); // For testing purposes
+	}
+	
+	private boolean getShootButton() {
+		// Get trigger button to shoot from Operator stick
+		// return false;
+		return operatorStick.getRawButton((uint_t)3);
+	}
+	
+	private boolean getFlushTrigger() {
+		//flush out the ball
+		return operatorStick.getRawButton((uint32_t)FLUSH_TRIGGER);
+	}
+	private double getManualButton() {
+		return operatorStick.getRawButton((uint32_t)5);
+	}
+	private boolean getRangeButton() {
+		return operatorStick.getRawButton((uint32_t)4);
+	}	
+	private void toggleManualState() {
+		if(manualState) {
+			manualState = false;
+		}
+		else {
+			manualState = true;
+		}
+	}
 }

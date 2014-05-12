@@ -1,3 +1,5 @@
+package Robot;
+
 /**
  * Subsystems represent a subsytem of the robot such as the shooter or drivetrain.
  * 
@@ -19,9 +21,4 @@ public abstract class Subsystem {
 	 * Update the subsystem.
 	 */
 	public void update() {}
-	
-	/**
-	 * Give the subsystem a command to run.
-	 */
-	public void runCommand(RobotCommand command) {}
 }

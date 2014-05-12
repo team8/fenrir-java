@@ -1,3 +1,4 @@
+
 /*
  * See JFenrir.java for documentation
  * Coded by the 2013-14 Paly Robotics Programming Team
@@ -10,12 +11,15 @@ import edu.wpi.first.wpilibj.*;
  * Runs the shooter
  * @author Neelay Junnarkar
  */
-public class Shooter extends Subsystem{
+public class Shooter extends Subsystem {
 
     private int state;
     
+    public void setState(int state){ this.state = state; }
+    public int getState(){ return state; }
+    
     //states, replacement for enum
-    private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4, MANUAL_LOAD = 5, MANUAL_FIRE = 6;
+    private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4, MANUAL_FIRING = 5, MANUAL_PREPARING = 6;
 
     private Victor shooterVic1;
     private Victor shooterVic2;
@@ -23,10 +27,9 @@ public class Shooter extends Subsystem{
     private Victor shooterVic4;
     private Victor loaderVic;
     
-    private Timer shootTimer;
+    public Timer shootTimer;
     
-    
-    public Shooter(){
+    public Shooter() {
         
         shooterVic1 = new Victor(Constants.PORT_SHOOTER_VIC_1);
         shooterVic2 = new Victor(Constants.PORT_SHOOTER_VIC_2);
@@ -38,60 +41,52 @@ public class Shooter extends Subsystem{
         
     }
     
-    @Override
-    public void init(){
+    public void init() {
         state = IDLE;
     }
     
-    @Override
-    public void disable(){
+    public void disable() {
         state = IDLE;
     }
     
-    @Override
-    public void update(){
-        switch (state){
-            case IDLE:
-                setAllVics(0.0);
-                break;
-            case PREPARING:
-                if (!shootTimer.hasPassedPeriod(3.0)){
-                    setShooterVics(3.0 );
-                }
-                else{
-                    state = FIRING;
-                    shootTimer.reset();
-                }
-                break;
-            case FIRING:
-                if (!shootTimer.hasPeriodPassed(3.0)){
-			loaderVic.Set(Constants.LOAD_SPEED);
-		}
-		else{
-    		    state = IDLE;
-    		}   
-                break;
-            case EJECTING:
-                loaderVic.set(1);
-                break;
-            case FLUSHING:
-                setAllVics(-0.3);
-                break;
-            case MANUAL_LOAD:
+    public void update() {
+        switch (state) {
+        case IDLE:
+            setAllVics(0.0);
+            break;
+        case PREPARING:
+            if (!shootTimer.hasPassedPeriod(3.0)) {
+                setShooterVics(1.0);
+            }
+            else {
+                state = FIRING;
+                shootTimer.reset();
+            }
+            break;
+        case FIRING:
+            if (!shootTimer.hasPeriodPassed(3.0)){
             	loaderVic.set(Constants.LOAD_SPEED);
-            	break;
-            case MANUAL_FIRE:
-            	setAllVics(1.0);
-            	break;
+            }
+            else {
+            	state = IDLE;
+            }   
+            break;
+        case EJECTING:
+            loaderVic.set(1);
+            break;
+        case FLUSHING:
+            setAllVics(-0.3);
+            break;
+        case MANUAL_FIRING:
+            loaderVic.set(Constants.LOAD_SPEED);
+            break;
+        case MANUAL_PREPARING:
+            setShooterVics(1.0);
+            break;
         }
     }
     
-    @Override
-    public void runCommand(RobotCommand command){
-        
-    }
-    
-    private void setAllVics(double spd){
+    private void setAllVics(double spd) {
         shooterVic1.set(-spd);
         shooterVic2.set(-spd);
         shooterVic3.set(spd);
@@ -99,10 +94,59 @@ public class Shooter extends Subsystem{
         loaderVic.set(-spd);
     }
     
-    private void setShooterVics(double spd){
+    private void setShooterVics(double spd) {
         shooterVic1.set(-spd);
         shooterVic2.set(-spd);
         shooterVic3.set(spd);
         shooterVic4.set(spd);
+    }
+    
+    public static class EjectCommand extends RobotCommand {
+    	setSubsystemType(SHOOTER);
+    	
+    	void execute(Shooter shooter){
+    		shooter.setState(EJECTING);
+    	}
+    }
+    
+    public static class SetIdleCommand extends RobotCommand {
+    	setSubsystemType(SHOOTER);
+    	
+    	void execute(Shooter shooter){
+    		shooter.setState(IDLE);
+    	}
+    }
+    
+    public static class FlushCommand extends RobotCommand {
+    	setSubsystemType(SHOOTER);
+    	
+    	void execute(Shooter shooter){
+    		shooter.setState(FLUSHING)
+    	}
+    }
+    
+    public static class FireCommand extends RobotCommand {
+    	setSubsystemType(SHOOTER);
+    	
+    	void execute(Shooter shooter){
+    		shooter.shootTimer.reset();
+    		shooter.setState(PREPARING);
+    	}
+    }
+    
+    public static class ManualPrepareCommand extends RobotCommand {
+    	setSubsystemType(SHOOTER);
+    	
+    	void execute(Shooter shooter){
+    		shooter.setState(MANUAL_PREPARING);
+    	}
+    }
+    
+    public static class ManualFireCommand extends RobotCommand {
+    	setSubsystemType(SHOOTER);
+    	
+    	void execute(Shooter shooter) {
+    		shooter.setState(MANUAL_FIRING);
+    	}
     }
 }

@@ -5,12 +5,35 @@
 
 package Robot;
 
+import edu.wpi.first.wpilibj.*;
+
 /**
- * Controls autonomous
- * @author Paly Robotics
+ * 
+ * @author Nihar Mitra
+ *
  */
+
 public class AutonomousController {
-    private void path() {
-        //command to drive correct distance
-    }
+	
+	private Timer time = new Timer();
+	
+	public AutonomousController(Robot robot) {
+		time.stop();
+		time.reset();
+	}
+	
+	/**
+	 * The path we want to take during autonomous
+	 */
+	private void path() {
+
+	}
+	
+	public void init() {
+		path();
+	}
+	
+	public void update() {
+		
+	}
 }

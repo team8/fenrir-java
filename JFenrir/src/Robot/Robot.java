@@ -11,49 +11,46 @@ package Robot;
  */
 public class Robot {
 
-    private DriveTrain driveTrain;
-    private Shooter shooter;
-    private Accumulator accumulator;
-    private Rangefinder rangefinder;
-
-    public Robot(){
-        driveTrain = new DriveTrain();
-        shooter = new Shooter();
-        accumulator = new Accumulator();
-        rangefinder = new Rangefinder();
-    }
+    private Drivetrain drivetrain = new Drivetrain();
+    private Shooter shooter = new Shooter();
+    private Accumulator accumulator = new Accumulator();
+    private Rangefinder rangefinder = new Rangefinder();
+    
 
     public void update(){
         accumulator.update();
-        driveTrain.update();
+        drivetrain.update();
         shooter.update();
         rangefinder.update();
     }
 
-    public void init(){
-        driveTrain.init();
+    public void init() {
+        drivetrain.init();
         shooter.init();
+        accumulator.init();
+        rangefinder.init();
     }
 
     public void disable(){
-        driveTrain.setSpeed(0);
+        drivetrain.disable();
         shooter.disable();
         accumulator.disable();
+        rangefinder.disable();
     }
     
     public void relayCommand(RobotCommand command){
         switch(command.subsystemType) {
             case RobotCommand.ACCUMULATOR:
-                accumulator.runCommand(command);
+                command.execute(accumulator);
                 break;
             case RobotCommand.DRIVETRAIN:
-                driveTrain.runCommand(command);
+                command.execute(drivetrain);
                 break;
             case RobotCommand.RANGEFINDER:
-                rangefinder.runCommand(command);
+                command.execute(rangefinder);
                 break;
             case RobotCommand.SHOOTER:
-                shooter.runCommand(command);
+                command.execute(shooter);
                 break;
         }
     }

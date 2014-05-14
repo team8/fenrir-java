@@ -1,5 +1,5 @@
-public class HumanController
-{
+public class HumanController {
+
 	private Robot robot;
 	private Joystick speedStick;
 	private Joystick turnStick;
@@ -17,7 +17,6 @@ public class HumanController
 	private boolean prevManualButton;
 	private boolean manualState;
 
-
 	public HumanController(Robot robot) {
 		speedStick = new Joystick(Constants.PORT_SPEED);
 		turnStick = new Joystick(Constants.PORT_TURN);
@@ -32,8 +31,8 @@ public class HumanController
 
 		/*SLIGHT MOVEMENT*/
 		if(getAbsTurnStick()<=.1 && getAbsSpeedStick()<=.1) {
-			robot.relayCommand(new Drivetrain.SetSpeedCommand(0));
-			robot.relayCommand(new Drivetrain.SetRotateCommand(0));
+			robot.relayCommand(new Drivetrain.SetSpeedCommand(0.0));
+			robot.relayCommand(new Drivetrain.SetRotateCommand(0.0));
 		}
 
 		/*FULL MOVEMENT*/
@@ -46,7 +45,7 @@ public class HumanController
 
 		/*ACCUMULATOR*/
 		if(getAccumulator()<-0.2) {
-			System.out.print("accumulating\n");
+			//System.out.print("accumulating\n");
 			robot.relayCommand(new Accumulator.StartAccumulatingCommand());
 			prevStop = false;
 		}

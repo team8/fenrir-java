@@ -130,7 +130,7 @@ public class Shooter extends Subsystem {
     	
     	void execute(Shooter shooter){
     		shooter.shootTimer.reset();
-    		shooter.setState(PREPARING);
+    		shooter.setState(MANUAL_FIRING);
     	}
     }
     

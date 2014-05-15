@@ -46,7 +46,7 @@ public class HumanController {
 		/*ACCUMULATOR*/
 		if(getAccumulator()<-0.2) {
 			//System.out.print("accumulating\n");
-			robot.relayCommand(new Accumulator.StartAccumulatingCommand());
+			robot.relayCommand(new Accumulator.AccumulateCommand());
 			prevStop = false;
 		}
 		else if(getAccumulator()>0.2) {
@@ -55,9 +55,9 @@ public class HumanController {
 			prevStop = false;
 		}
 		else {
-			robot.relayCommand(new Accumulator.StopCommand());
+			robot.relayCommand(new Accumulator.SetIdleCommand());
 			if(!prevStop) {
-				robot.relayCommand(new Shooter.IdleCommand());
+				robot.relayCommand(new Shooter.SetIdleCommand());
 			}
 			prevStop = true;
 		}
@@ -65,9 +65,9 @@ public class HumanController {
 		/*FLUSHING*/
 		if (getFlushTrigger()) {
 			robot.relayCommand(new Accumulator.FlushCommand());
-			robot.relayCommand(new Shooter.IdleCommand());
-			robot.relayCommand(new Accumulator.StopCommand());
-			robot.relayCommand(new Shooter.StopCommand());
+			robot.relayCommand(new Shooter.SetIdleCommand());
+			robot.relayCommand(new Accumulator.SetIdleCommand());
+			robot.relayCommand(new Shooter.SetIdleCommand());
 			robot.relayCommand(new Shooter.FlushCommand());
 		}
 		else if (!getFlushTrigger() && lastFlushTrigger) {
@@ -89,10 +89,10 @@ public class HumanController {
 		}
 		else if(manualState == true) {
 			System.out.println("is in manual\n");
-			robot.relayCommand(new Shooter.ManualFireCommand());
+			robot.relayCommand(new Shooter.ManualPrepareCommand());
 			
 			if(getShootButton()) {
-				robot.relayCommand(new Shooter.ManualCommand());
+				robot.relayCommand(new Shooter.ManualFireCommand());
 			}
 			prevZ = false;
 		}

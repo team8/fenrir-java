@@ -38,6 +38,13 @@ public class Robot {
         rangefinder.disable();
     }
     
+    /**
+     * Lets you run commands on subsystem
+     * Format:
+     * robot.relayCommand(new Subsytem.DoStuffCommand(params));
+     * 
+     * @param command Subsystem's command to run
+     */ 
     public void relayCommand(RobotCommand command){
         switch(command.subsystemType) {
             case RobotCommand.ACCUMULATOR:
@@ -52,6 +59,6 @@ public class Robot {
             case RobotCommand.SHOOTER:
                 command.execute(shooter);
                 break;
-        }
+    }
     }
 }

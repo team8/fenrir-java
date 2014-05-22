@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.*;
  * @author Neelay Junnarkar
  * @author Benjamin Cohen-Wang
  * @author Jonathan Zwiebel
+ * @author Nihar Mitra
  */
 public class Drivetrain extends Subsystem {
 	
@@ -81,7 +82,7 @@ public class Drivetrain extends Subsystem {
 				rightFrontVic.set(rightSpeed);
 				rightBackVic.set(rightSpeed);
 				break;
-			case AUTO_DRIVING:
+			case DRIVE_DIST:
 				double average = (rightEnc.getDistance()+leftEnc.getDistance())/2;
 				if(rightEnc.getDistance() < Math.abs(targetDist)) {
 					System.out.println("getting called right");
@@ -109,6 +110,10 @@ public class Drivetrain extends Subsystem {
 		rotateSpeed = speed;
 		state = TELE_DRIVING;
 	}
+	
+	private void driveDist(double dist) {
+		//TODO: do pls
+	}
 
 	private void setAllVics(double spd) {
 		leftFrontVic.set(-spd);
@@ -118,7 +123,7 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public static abstract class DrivetrainCommand extends RobotCommand {
-		protected final double speed;
+		protected final double arg;
 		
 		public DrivetrainCommand() {
 			setSubsystemType(DRIVETRAIN);
@@ -130,7 +135,7 @@ public class Drivetrain extends Subsystem {
 	public static class SetSpeedCommand extends DrivetrainCommand {
 		
 		public SetSpeedCommand(double speed) {
-			this.speed = speed;
+			this.arg = speed;
 		}
 		
 		public void execute(Drivetrain drivetrain) {
@@ -142,11 +147,17 @@ public class Drivetrain extends Subsystem {
 	public static class SetRotateCommand extends DrivetrainCommand {
 		
 		public SetRotateCommand(double speed){
-			this.speed = speed;
+			this.arg = speed;
 		}
 		
-		public void execute(Drivetrain drivetrain){
+		public void execute(Drivetrain drivetrain) {
 			drivetrain.rotateS(speed);
+		}
+	}
+	public static class DriveDistCommand extends DrivetrainCommand {
+		
+		public DriveDistCommand(double dist) {
+			this.arg = dist;
 		}
 	}
 }

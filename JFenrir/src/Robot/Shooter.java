@@ -37,7 +37,7 @@ public class Shooter extends Subsystem {
         shooterVic4 = new Victor(Constants.PORT_SHOOTER_VIC_4);
         loaderVic = new Victor(Constants.PORT_LOADER_VIC);
         
-        shootTimer = new Timer;
+        shootTimer = new Timer();
         
     }
     

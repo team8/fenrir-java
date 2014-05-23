@@ -46,7 +46,7 @@ public class Robot {
      * @param command Subsystem's command to run
      */ 
     public void relayCommand(RobotCommand command){
-        switch(command.subsystemType) {
+        switch(command.getSubsystemType()) {
             case RobotCommand.ACCUMULATOR:
                 command.execute(accumulator);
                 break;

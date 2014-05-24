@@ -102,7 +102,9 @@ public class Shooter extends Subsystem {
     }
     
     public static class EjectCommand extends RobotCommand {
-    	setSubsystemType(RobotCommand.SHOOTER);
+    	public ManualPrepareCommand(){
+    		  setSubsystemType(RobotCommand.SHOOTER);
+    	}
     	
     	void execute(Shooter shooter){
     		shooter.setState(EJECTING);
@@ -110,46 +112,52 @@ public class Shooter extends Subsystem {
     }
     
     public static class SetIdleCommand extends RobotCommand {
-
+			public ManualPrepareCommand(){
+    		  setSubsystemType(RobotCommand.SHOOTER);
+    	}
     	
     	void execute(Shooter shooter){
-    	    setSubsystemType(RobotCommand.SHOOTER);
     		shooter.setState(IDLE);
     	}
     }
     
     public static class FlushCommand extends RobotCommand {
-
+			public ManualPrepareCommand(){
+    		  setSubsystemType(RobotCommand.SHOOTER);
+    	}
     	
     	void execute(Shooter shooter){
-    	    setSubsystemType(RobotCommand.SHOOTER);
     		shooter.setState(FLUSHING)
     	}
     }
     
     public static class FireCommand extends RobotCommand {
-
+			public ManualPrepareCommand(){
+    		  setSubsystemType(RobotCommand.SHOOTER);
+    	}
     	
     	void execute(Shooter shooter){
-    	    setSubsystemType(RobotCommand.SHOOTER);
     		shooter.shootTimer.reset();
     		shooter.setState(MANUAL_FIRING);
     	}
     }
     
     public static class ManualPrepareCommand extends RobotCommand {
+    	public ManualPrepareCommand(){
+    		  setSubsystemType(RobotCommand.SHOOTER);
+    	}
     	
     	void execute(Shooter shooter){
-    		    	setSubsystemType(RobotCommand.SHOOTER);
     		shooter.setState(MANUAL_PREPARING);
     	}
     }
     
     public static class ManualFireCommand extends RobotCommand {
-
+			public ManualPrepareCommand(){
+    		  setSubsystemType(RobotCommand.SHOOTER);
+    	}
     	
     	void execute(Shooter shooter) {
-    		setSubsystemType(RobotCommand.SHOOTER);
     		shooter.setState(MANUAL_FIRING);
     	}
     }

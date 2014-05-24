@@ -94,4 +94,14 @@ public class Accumulator extends Subsystem {
 			accu.setState(IDLE);
 		}
 	}
+	
+	public static class EjectCommand extends RobotCommand {
+		
+		public EjectCommand() {
+			subsystemType = RobotCommand.ACCUMULATOR;
+		}
+		void execute(Accumulator accu) {
+			accu.setState(PASSING);
+		}
+	}
 }

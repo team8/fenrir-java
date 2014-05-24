@@ -8,8 +8,8 @@ package Robot;
 import edu.wpi.first.wpilibj.*;
 
 /**
- *
  * Runs the drivetrain
+ * 
  * @author Neelay Junnarkar
  * @author Benjamin Cohen-Wang
  * @author Jonathan Zwiebel
@@ -67,37 +67,29 @@ public class Drivetrain extends Subsystem {
 		state = IDLE;
 	}
 
-	public void disable(){
+	public void disable() {
 		state = IDLE;
 	}
 	
 	public void update() {
-	
 		switch (state) {
-			case TELE_DRIVING:
-				double leftSpeed = Math.min(Math.max(-(targetSpeed + rotateSpeed), -1), 1);
-				double rightSpeed = Math.min(Math.max(targetSpeed - rotateSpeed, -1), 1);
-				leftFrontVic.set(leftSpeed);
-				leftBackVic.set(leftSpeed);
-				rightFrontVic.set(rightSpeed);
-				rightBackVic.set(rightSpeed);
-				break;
-			case DRIVE_DIST:
-				double average = (rightEnc.getDistance()+leftEnc.getDistance())/2;
-				if(rightEnc.getDistance() < Math.abs(targetDist)) {
-					System.out.println("getting called right");
-					rightFrontVic.set(0.3);
-					rightBackVic.set(0.3);
-				}
-				if(leftEnc.getDistance() < Math.abs(targetDist)) {
-					System.out.println("getting called left");
-					leftFrontVic.set(-0.3);
-					leftBackVic.set(-0.3);
-				}
-				break;
-			case IDLE:
-				setAllVics(0.0);
-				break;
+		case TELE_DRIVING:
+			double leftSpeed = Math.min(Math.max(-(targetSpeed + rotateSpeed), -1), 1);
+			double rightSpeed = Math.min(Math.max(targetSpeed - rotateSpeed, -1), 1);
+			leftFrontVic.set(leftSpeed);
+			leftBackVic.set(leftSpeed);
+			rightFrontVic.set(rightSpeed);
+			rightBackVic.set(rightSpeed);
+			break;
+		case DRIVE_DIST:
+			rightFrontVic.Set(-rightFrontController.Get());
+			rightBackVic.Set(-rightBackController.Get());
+			leftFrontVic.Set(leftFrontController.Get());
+			leftBackVic.Set(leftBackController.Get());
+			break;
+		case IDLE:
+			setAllVics(0.0);
+			break;
 		}
 	}
 
@@ -112,7 +104,22 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	private void driveDist(double dist) {
-		//TODO: do pls
+		leftEnc.Reset();
+		rightEnc.Reset();
+		leftFrontController.Reset();
+		leftBackController.Reset();
+		rightFrontController.Reset();
+		rightBackController.Reset();
+		leftFrontController.SetSetpoint(dist);
+		rightFrontController.SetSetpoint(dist);
+		leftBackController.SetSetpoint(dist);
+		rightBackController.SetSetpoint(dist);
+		leftFrontController.Enable();
+		rightFrontController.Enable();
+		leftBackController.Enable();
+		rightBackController.Enable();
+		
+		state = DRIVE_DIST;
 	}
 
 	private void setAllVics(double spd) {
@@ -146,7 +153,7 @@ public class Drivetrain extends Subsystem {
 	
 	public static class SetRotateCommand extends DrivetrainCommand {
 		
-		public SetRotateCommand(double speed){
+		public SetRotateCommand(double speed) {
 			this.arg = speed;
 		}
 		
@@ -158,6 +165,10 @@ public class Drivetrain extends Subsystem {
 		
 		public DriveDistCommand(double dist) {
 			this.arg = dist;
+		}
+		
+		public void execute(Drivetrain drivetrain) {
+			drivetrain.driveDist(dist);
 		}
 	}
 }

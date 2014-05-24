@@ -133,10 +133,9 @@ public class Drivetrain extends Subsystem {
 		protected final double arg;
 		
 		public DrivetrainCommand() {
-			setSubsystemType(DRIVETRAIN);
+			subsystemType = RobotCommand.DRIVETRAIN;
 		}
 		
-		abstract void execute(Drivetrain drivetrain);
 	}
 	
 	public static class SetSpeedCommand extends DrivetrainCommand {

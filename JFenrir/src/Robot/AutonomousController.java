@@ -37,12 +37,10 @@ public class AutonomousController {
 		robot.relayCommand(new Drivetrain.DriveDist(spawnDist - shootDist));
 	}
 	
-	@Override
 	public void init() {
 		path();
 	}
 	
-	@Override
 	public void update() {
 		
 	}

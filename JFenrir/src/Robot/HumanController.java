@@ -44,7 +44,7 @@ public class HumanController {
 			robot.relayCommand(new Drivetrain.SetSpeedCommand(speedStick.getY()));
 		}
 		if(getAbsTurnStick()>0.1) {
-			robot.relayCommand(new Drivetrain.SetRotateCommand(rotStick.getX()));
+			robot.relayCommand(new Drivetrain.SetRotateCommand(turnStick.getX()));
 		}
 
 		/*ACCUMULATOR*/
@@ -134,18 +134,18 @@ public class HumanController {
 	private boolean getShootButton() {
 		// Get trigger button to shoot from Operator stick
 		// return false;
-		return operatorStick.getRawButton((uint_t)3);
+		return operatorStick.getRawButton(3);
 	}
 	
 	private boolean getFlushTrigger() {
 		//flush out the ball
-		return operatorStick.getRawButton((uint32_t)FLUSH_TRIGGER);
+		return operatorStick.getRawButton(Constants.FLUSH_TRIGGER);
 	}
-	private double getManualButton() {
-		return operatorStick.getRawButton((uint32_t)5);
+	private boolean getManualButton() {
+		return operatorStick.getRawButton(5);
 	}
 	private boolean getRangeButton() {
-		return operatorStick.getRawButton((uint32_t)4);
+		return operatorStick.getRawButton(4);
 	}	
 	private void toggleManualState() {
 		if(manualState) {

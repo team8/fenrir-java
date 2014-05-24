@@ -46,6 +46,7 @@ public class Drivetrain extends Subsystem {
 	public final static int IDLE = 0;
 	public final static int AUTO_DRIVING = 1;
 	public final static int TELE_DRIVING = 2;
+	public final static int DRIVE_DIST = 3;
 	
 	public void init() {
 		//Reset Encoders
@@ -82,10 +83,10 @@ public class Drivetrain extends Subsystem {
 			rightBackVic.set(rightSpeed);
 			break;
 		case DRIVE_DIST:
-			rightFrontVic.Set(-rightFrontController.Get());
-			rightBackVic.Set(-rightBackController.Get());
-			leftFrontVic.Set(leftFrontController.Get());
-			leftBackVic.Set(leftBackController.Get());
+			rightFrontVic.set(-rightFrontController.get());
+			rightBackVic.set(-rightBackController.get());
+			leftFrontVic.set(leftFrontController.get());
+			leftBackVic.set(leftBackController.get());
 			break;
 		case IDLE:
 			setAllVics(0.0);
@@ -104,20 +105,20 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	private void driveDist(double dist) {
-		leftEnc.Reset();
-		rightEnc.Reset();
-		leftFrontController.Reset();
-		leftBackController.Reset();
-		rightFrontController.Reset();
-		rightBackController.Reset();
-		leftFrontController.SetSetpoint(dist);
-		rightFrontController.SetSetpoint(dist);
-		leftBackController.SetSetpoint(dist);
-		rightBackController.SetSetpoint(dist);
-		leftFrontController.Enable();
-		rightFrontController.Enable();
-		leftBackController.Enable();
-		rightBackController.Enable();
+		leftEnc.reset();
+		rightEnc.reset();
+		leftFrontController.reset();
+		leftBackController.reset();
+		rightFrontController.reset();
+		rightBackController.reset();
+		leftFrontController.setSetpoint(dist);
+		rightFrontController.setSetpoint(dist);
+		leftBackController.setSetpoint(dist);
+		rightBackController.setSetpoint(dist);
+		leftFrontController.enable();
+		rightFrontController.enable();
+		leftBackController.enable();
+		rightBackController.enable();
 		
 		state = DRIVE_DIST;
 	}
@@ -146,7 +147,7 @@ public class Drivetrain extends Subsystem {
 		
 		public void execute(Drivetrain drivetrain) {
 			// Set the speed of the victors to the variable speed
-			drivetrain.setSpeed(speed);
+			drivetrain.setSpeed(arg);
 		}
 	}
 	
@@ -157,7 +158,7 @@ public class Drivetrain extends Subsystem {
 		}
 		
 		public void execute(Drivetrain drivetrain) {
-			drivetrain.rotateS(speed);
+			drivetrain.rotateS(arg);
 		}
 	}
 	public static class DriveDistCommand extends DrivetrainCommand {
@@ -167,7 +168,7 @@ public class Drivetrain extends Subsystem {
 		}
 		
 		public void execute(Drivetrain drivetrain) {
-			drivetrain.driveDist(dist);
+			drivetrain.driveDist(arg);
 		}
 	}
 }

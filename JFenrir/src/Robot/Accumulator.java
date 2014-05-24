@@ -53,7 +53,7 @@ public class Accumulator extends Subsystem {
 	}
 	
 	public static class AccumulateCommand extends RobotCommand {
-		setSubsystemType(ACCUMULATOR);
+		setSubsystemType(RobotCommand.ACCUMULATOR);
 		
 		void execute(Accumulator accu){
 			accu.setState(ACCUMULATING);
@@ -61,7 +61,7 @@ public class Accumulator extends Subsystem {
 	}
     
 	public static class PassCommand extends RobotCommand {
-		setSubsystemType(ACCUMULATOR);
+		setSubsystemType(RobotCommand.ACCUMULATOR);
 		
 		void execute(Accumulator accu){
 			accu.setState(PASSING);
@@ -69,7 +69,7 @@ public class Accumulator extends Subsystem {
     }
     
 	public static class FlushCommand extends RobotCommand {
-		setSubsystemType(ACCUMULATOR);
+		setSubsystemType(RobotCommand.ACCUMULATOR);
 		
 		void execute(Accumulator accu){
 			accu.setState(PASSING);
@@ -77,7 +77,7 @@ public class Accumulator extends Subsystem {
 	}
 	
 	public static class SetIdleCommand extends RobotCommand {
-		setSubsystemType(ACCUMULATOR);
+		setSubsystemType(RobotCommand.ACCUMULATOR);
 		
 		void execute(Accumulator accu){
 			accu.setState(IDLE);

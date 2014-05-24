@@ -12,7 +12,7 @@ public abstract class RobotCommand {
 	/**
 	 * The subsystem the robot class should send the command to.
 	 */
-	private int subsystemType;
+	int subsystemType;
 	
 	/**
 	 * Pseudo-enum to represent each subsystem.

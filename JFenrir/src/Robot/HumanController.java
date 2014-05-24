@@ -1,3 +1,7 @@
+package Robot;
+
+import edu.wpi.first.wpilibj.*;
+
 public class HumanController {
 
 	private Robot robot;

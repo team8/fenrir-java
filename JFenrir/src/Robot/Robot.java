@@ -5,6 +5,7 @@
 
 package Robot;
 
+import edu.wpi.first.wpilibj.*;
 /**
  * Runs the robot
  * @author Paly Robotics

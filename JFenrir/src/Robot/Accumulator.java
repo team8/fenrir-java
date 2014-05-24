@@ -55,7 +55,7 @@ public class Accumulator extends Subsystem {
 	public static class AccumulateCommand extends RobotCommand {
 		
 		public AccumulateCommand() {
-			setSubsystemType(RobotCommand.ACCUMULATOR);
+			subsystemType = RobotCommand.ACCUMULATOR;
 		}
 		
 		void execute(Accumulator accu){
@@ -66,7 +66,7 @@ public class Accumulator extends Subsystem {
 	public static class PassCommand extends RobotCommand {
 		
 		public PassCommand() {
-			setSubsystemType(RobotCommand.ACCUMULATOR);
+			subsystemType = RobotCommand.ACCUMULATOR;
 		}
 		
 		void execute(Accumulator accu){
@@ -76,7 +76,7 @@ public class Accumulator extends Subsystem {
     
 	public static class FlushCommand extends RobotCommand {
 		public FlushCommand() {
-			setSubsystemType(RobotCommand.ACCUMULATOR);
+			subsystemType  = RobotCommand.ACCUMULATOR;
 		}
 		void execute(Accumulator accu){
 
@@ -87,7 +87,7 @@ public class Accumulator extends Subsystem {
 	public static class SetIdleCommand extends RobotCommand {
 		
 		public SetIdleCommand() {
-			setSubsystemType(RobotCommand.ACCUMULATOR);
+			subsystemType = RobotCommand.ACCUMULATOR;
 		}
 		void execute(Accumulator accu){
 

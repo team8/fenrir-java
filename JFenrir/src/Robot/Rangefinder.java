@@ -32,6 +32,7 @@ public class Rangefinder extends Subsystem {
 	
 	public double measureAngle() {
 	    // Probably obsolete
+	    return 0.0;
 	}
 	
 	public void rotateToWall() {
@@ -40,6 +41,7 @@ public class Rangefinder extends Subsystem {
 	
 	public float wallDist() {
 	    // Probably obsolete
+	    return 0.0;
 	}
 	
 	public double getDist() {

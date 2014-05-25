@@ -60,11 +60,10 @@ public class Shooter extends Subsystem {
             }
             else {
                 state = FIRING;
-                shootTimer.reset();
             }
             break;
         case FIRING:
-            if (shootTimer.get() < 3.0){
+            if (shootTimer.get() >= 3.0){
             	loaderVic.set(Constants.LOAD_SPEED);
             }
             else {
@@ -138,7 +137,7 @@ public class Shooter extends Subsystem {
     	
     	void execute(Shooter shooter){
     		shooter.shootTimer.reset();
-    		shooter.setState(MANUAL_FIRING);
+    		shooter.setState(PREPARING);
     	}
     }
     

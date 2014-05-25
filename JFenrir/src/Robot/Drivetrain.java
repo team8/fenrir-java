@@ -133,7 +133,8 @@ public class Drivetrain extends Subsystem {
 	public static abstract class DrivetrainCommand extends RobotCommand {
 		protected final double arg;
 		
-		public DrivetrainCommand() {
+		public DrivetrainCommand(double speed) {
+			this.arg = speed;
 			subsystemType = RobotCommand.DRIVETRAIN;
 		}
 		
@@ -142,7 +143,7 @@ public class Drivetrain extends Subsystem {
 	public static class SetSpeedCommand extends DrivetrainCommand {
 		
 		public SetSpeedCommand(double speed) {
-			this.arg = speed;
+			super(speed);
 		}
 		
 		public void execute(Drivetrain drivetrain) {
@@ -154,7 +155,7 @@ public class Drivetrain extends Subsystem {
 	public static class SetRotateCommand extends DrivetrainCommand {
 		
 		public SetRotateCommand(double speed) {
-			this.arg = speed;
+			super(speed);
 		}
 		
 		public void execute(Drivetrain drivetrain) {
@@ -164,7 +165,7 @@ public class Drivetrain extends Subsystem {
 	public static class DriveDistCommand extends DrivetrainCommand {
 		
 		public DriveDistCommand(double dist) {
-			this.arg = dist;
+			super(speed);
 		}
 		
 		public void execute(Drivetrain drivetrain) {

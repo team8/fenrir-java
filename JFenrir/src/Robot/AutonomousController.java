@@ -6,7 +6,7 @@
 package Robot;
 
 import edu.wpi.first.wpilibj.*;
-import Robot.Drivetrain; // Need to use Drivetrain's commands
+//import Robot.Drivetrain; // Need to use Drivetrain's commands
 /**
  * Autonomous control
  * 

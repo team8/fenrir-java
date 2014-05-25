@@ -71,7 +71,7 @@ public class Constants {
     public final static int ULTRASONIC_RX_RIGHT = 14;
     public final static int HIGH = 1;
     public final static int LOW = 0;
-    public final static int ULTRA_GAP = 1; // Distance between the two ultrasonic sensors in inches
+   // public final static int ULTRA_GAP = 1; // Distance between the two ultrasonic sensors in inches// needs to be measured and put in
 
 
     public final static int SHOOT_DISTANCE = 0; //The set distance we want it to shoot at

@@ -62,8 +62,8 @@ public class Drivetrain extends Subsystem {
 		leftBackController.setOutputRange(-1, 1);
 		rightEnc.setDistancePerPulse(.0782);
 		leftEnc.setDistancePerPulse(.0813);
-		rightEnc.setPIDSourceParameter(PIDSource.kDistance);
-		leftEnc.setPIDSourceParameter(PIDSource.kDistance);
+		rightEnc.setPIDSourceParameter(PIDSource.PIDSourceParameter.kDistance);
+		leftEnc.setPIDSourceParameter(PIDSource.PIDSourceParameter.kDistance);
 		
 		state = IDLE;
 	}

@@ -39,7 +39,7 @@ public class Rangefinder extends Subsystem {
 	    // Probably obsolete
 	}
 	
-	public float wallDist() {
+	public double wallDist() {
 	    // Probably obsolete
 	    return 0.0;
 	}

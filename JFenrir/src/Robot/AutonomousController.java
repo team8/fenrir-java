@@ -34,7 +34,7 @@ public class AutonomousController {
 	 * The path we want to take during autonomous
 	 */
 	private void path() {
-		robot.relayCommand(new Drivetrain.DriveDist(spawnDist - shootDist));
+		robot.relayCommand(new Drivetrain.DriveDistCommand(spawnDist - shootDist));
 	}
 	
 	public void init() {

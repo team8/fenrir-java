@@ -36,15 +36,15 @@ public class Accumulator extends Subsystem {
 	
 	public void update() {
 		switch(state) {
-		case IDLE:
-			setAllVics(0.0);
-			break;
-		case ACCUMULATING:
-			accuVic.set(-1.0);
-			break;
-		case PASSING:
-			accuVic.set(1.0);
-			break;
+			case IDLE:
+				setAllVics(0.0);
+				break;
+			case ACCUMULATING:
+				accuVic.set(-1.0);
+				break;
+			case PASSING:
+				accuVic.set(1.0);
+				break;
 		}
 	}
     
@@ -58,7 +58,7 @@ public class Accumulator extends Subsystem {
 			subsystemType = RobotCommand.ACCUMULATOR;
 		}
 		
-		void execute(Accumulator accu){
+		void execute(Accumulator accu) {
 			accu.setState(ACCUMULATING);
 		}
 	}

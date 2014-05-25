@@ -165,7 +165,7 @@ public class Drivetrain extends Subsystem {
 	public static class DriveDistCommand extends DrivetrainCommand {
 		
 		public DriveDistCommand(double dist) {
-			super(speed);
+			super(dist);
 		}
 		
 		public void execute(Drivetrain drivetrain) {

@@ -43,7 +43,7 @@ public class Rangefinder extends Subsystem {
 	}
 	
 	public double getDist() {
-	    return distInch
+	    return distInch;
 	}
 	
 	public void setDistToWall(float dist) {
@@ -53,12 +53,12 @@ public class Rangefinder extends Subsystem {
 	public void update() {
 	    switch (state) {
 	    	case IDLE:
-	    		rxLeft.set(0);
-	    		rxRight.set(0);
+	    		rxLeft.set(false);
+	    		rxRight.set(false);
 	    		break;
 	    	case LEFT:
-	    		rxLeft.set(1);
-			rxRight.set(0);
+	    		rxLeft.set(true);
+			rxRight.set(false);
 			if (leftTotal < 10) {
 				double dist = ultraLeft.getVoltage() * 104;
 				System.out.println("Left: " + dist);
@@ -70,8 +70,8 @@ public class Rangefinder extends Subsystem {
 			}
 	    		break;
 	    	case RIGHT:
-	    		rxLeft.set(0);
-			rxRight.set(1);
+	    		rxLeft.set(false);
+			rxRight.set(true);
 			if (rightTotal < 10) {
 				double dist = ultraRight.getVoltage() * 104;
 				System.out.println("Right: " + dist);
@@ -83,8 +83,8 @@ public class Rangefinder extends Subsystem {
 			}
 	    		break;
 	    	case FINISHED:
-	    		rxLeft.set(0);
-			rxRight.set(0);
+	    		rxLeft.set(false);
+			rxRight.set(false);
 			state = IDLE;
 
 			distInch = (rightAvg + leftAvg) / 2;
@@ -99,7 +99,7 @@ public class Rangefinder extends Subsystem {
 	}
     
     	public static class FindDistCommand extends RobotCommand {
-    		public FindDistCommand {
+    		public FindDistCommand() {
     			subsystemType = RANGEFINDER;
     		}    		
     		void execute(Rangefinder rangefinder) {

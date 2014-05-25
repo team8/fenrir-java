@@ -55,7 +55,7 @@ public class Shooter extends Subsystem {
             setAllVics(0.0);
             break;
         case PREPARING:
-            if (!(shootTimer.get() > 3.0))) {
+            if (shootTimer.get() < 3.0) {
                 setShooterVics(1.0);
             }
             else {
@@ -64,7 +64,7 @@ public class Shooter extends Subsystem {
             }
             break;
         case FIRING:
-            if (!(shootTimer.get() > 3.0)){
+            if (shootTimer.get() < 3.0){
             	loaderVic.set(Constants.LOAD_SPEED);
             }
             else {

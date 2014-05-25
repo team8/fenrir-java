@@ -10,10 +10,7 @@ public class HumanController {
 	private Joystick operatorStick;
 
 	//booleans used to make sure we don't reissue same command
-	private boolean accuButtonPrev;
 	private boolean shootButtonPrev;
-	private boolean warmupButtonPrev;
-	private boolean passButtonPrev;
 	private boolean lastFlushTrigger;
 	private boolean prevRangeButton;
 	private boolean prevStop;
@@ -87,7 +84,7 @@ public class HumanController {
 				robot.relayCommand(new Shooter.FireCommand());
 			}
 			else if (!prevZ) {
-				
+				robot.relayCommand(new Shooter.SetIdleCommand());
 			}
 			prevZ = true;
 		}

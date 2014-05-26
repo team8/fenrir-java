@@ -66,13 +66,11 @@ public class HumanController {
 		/*FLUSHING*/
 		if (getFlushTrigger()) {
 			robot.relayCommand(new Accumulator.FlushCommand());
-			robot.relayCommand(new Shooter.SetIdleCommand());
-			robot.relayCommand(new Accumulator.SetIdleCommand());
-			robot.relayCommand(new Shooter.SetIdleCommand());
 			robot.relayCommand(new Shooter.FlushCommand());
 		}
 		else if (!getFlushTrigger() && lastFlushTrigger) {
-			
+			robot.relayCommand(new Accumulator.SetIdleCommand());
+			robot.relayCommand(new Shooter.SetIdleCommand());
 		}
 		
 		/*SHOOTER*/

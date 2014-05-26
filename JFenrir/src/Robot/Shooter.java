@@ -63,11 +63,11 @@ public class Shooter extends Subsystem {
             }
             break;
         case FIRING:
-            if (shootTimer.get() >= 3.0){
-            	loaderVic.set(Constants.LOAD_SPEED);
+            if (shootTimer.get() >= 5.0){
+        	state = IDLE;
             }
-            else {
-            	state = IDLE;
+            else { 
+            	loaderVic.set(Constants.LOAD_SPEED);
             }   
             break;
         case EJECTING:

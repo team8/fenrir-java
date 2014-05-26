@@ -63,7 +63,7 @@ public class Shooter extends Subsystem {
             }
             break;
         case FIRING:
-            if (shootTimer.get() > 5.0){
+            if (shootTimer.get() >= 3.0){
             	state = IDLE;
             }
             else {

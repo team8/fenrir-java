@@ -64,10 +64,10 @@ public class Shooter extends Subsystem {
             break;
         case FIRING:
             if (shootTimer.get() >= 3.0){
-            	state = IDLE;
+            	loaderVic.set(Constants.LOAD_SPEED);
             }
             else {
-            	loaderVic.set(Constants.LOAD_SPEED);
+            	state = IDLE;
             }   
             break;
         case EJECTING:

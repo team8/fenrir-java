@@ -51,37 +51,37 @@ public class Shooter extends Subsystem {
     
     public void update() {
         switch (state) {
-        case IDLE:
-            setAllVics(0.0);
-            break;
-        case PREPARING:
-            if (shootTimer.get() < 3.0) {
-                setShooterVics(1.0);
-            }
-            else {
-                state = FIRING;
-            }
-            break;
-        case FIRING:
-            if (shootTimer.get() >= 3.0 && shootTimer.get() < 5.0){
-       		loaderVic.set(Constants.LOAD_SPEED);
-            }
-            else if (shootTimer.get() >= 5.0){ 
-		state = IDLE;
-            }   
-            break;
-        case EJECTING:
-            loaderVic.set(1);
-            break;
-        case FLUSHING:
-            setAllVics(-0.3);
-            break;
-        case MANUAL_FIRING:
-            loaderVic.set(Constants.LOAD_SPEED);
-            break;
-        case MANUAL_PREPARING:
-            setShooterVics(1.0);
-            break;
+	        case IDLE:
+	            setAllVics(0.0);
+	            break;
+	        case PREPARING:
+	            if (shootTimer.get() < 3.0) {
+	                setShooterVics(1.0);
+	            }
+	            else {
+	                state = FIRING;
+	            }
+	            break;
+	        case FIRING:
+	            if (shootTimer.get() >= 3.0 && shootTimer.get() < 5.0){
+	       		loaderVic.set(Constants.LOAD_SPEED);
+	            }
+	            else if (shootTimer.get() >= 5.0){ 
+			state = IDLE;
+	            }   
+	            break;
+	        case EJECTING:
+	            loaderVic.set(1);
+	            break;
+	        case FLUSHING:
+	            setAllVics(-0.3);
+	            break;
+	        case MANUAL_FIRING:
+	            loaderVic.set(Constants.LOAD_SPEED);
+	            break;
+	        case MANUAL_PREPARING:
+	            setShooterVics(1.0);
+	            break;
         }
     }
     

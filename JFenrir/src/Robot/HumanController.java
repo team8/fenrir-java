@@ -25,6 +25,7 @@ public class HumanController {
 		prevStop = false;
 		prevZ = false;
 		manualState = false;
+		lastFlushTrigger = false;
 		this.robot = robot;
 	}
 
@@ -74,11 +75,11 @@ public class HumanController {
 		}
 		
 		/*SHOOTER*/
-		if(getManualButton() && !prevManualButton) {
+		if (getManualButton() && !prevManualButton) {
 			toggleManualState();
 		}
-		if(manualState == false) {
-			if(shootButtonPrev!=getShootButton() && getShootButton()) {
+		if (manualState == false) {
+			if (shootButtonPrev == false && getShootButton()) {
 				robot.relayCommand(new Shooter.FireCommand());
 			}
 			else if (!prevZ) {
@@ -86,18 +87,18 @@ public class HumanController {
 			}
 			prevZ = true;
 		}
-		else if(manualState == true) {
+		else if (manualState == true) {
 			System.out.println("is in manual\n");
 			robot.relayCommand(new Shooter.ManualPrepareCommand());
 			
-			if(getShootButton()) {
+			if (getShootButton()) {
 				robot.relayCommand(new Shooter.ManualFireCommand());
 			}
 			prevZ = false;
 		}
 		
 		/*RANGEFINDER*/
-		if(!prevRangeButton && getRangeButton()){
+		if (!prevRangeButton && getRangeButton()){
 			robot.relayCommand(new Rangefinder.FindDistCommand());
 		}	
 		
@@ -143,11 +144,6 @@ public class HumanController {
 		return operatorStick.getRawButton(4);
 	}	
 	private void toggleManualState() {
-		if(manualState) {
-			manualState = false;
-		}
-		else {
-			manualState = true;
-		}
+		manualState = !manualState;
 	}
 }

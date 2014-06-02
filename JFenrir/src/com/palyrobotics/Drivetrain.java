@@ -48,6 +48,22 @@ public class Drivetrain extends Subsystem {
 	public final static int TELE_DRIVING = 2;
 	public final static int DRIVE_DIST = 3;
 	
+	public Drivetrain(){
+            leftEnc = new Encoder(Constants.PORT_ENCODER_LEFT_A, Constants.PORT_ENCODER_LEFT_B);
+            rightEnc = new Encoder(Constants.PORT_ENCODER_RIGHT_A, Constants.PORT_ENCODER_RIGHT_B);
+            leftFrontVic = new Victor(Constants.PORT_DRIVE_VIC_LEFT_FRONT);
+            leftBackVic = new Victor(Constants.PORT_DRIVE_VIC_LEFT_BACK);
+            rightFrontVic = new Victor(Constants.PORT_DRIVE_VIC_RIGHT_FRONT);
+            rightBackVic = new Victor(Constants.PORT_DRIVE_VIC_RIGHT_BACK);
+            leftFrontController = new PIDController(0.1,0.001,0.1,leftEnc,leftFrontVic);
+            leftBackController = new PIDController(0.1,0.001,0.1,leftEnc,leftBackVic);
+            rightBackController = new PIDController(0.1,0.001,0.1,rightEnc,rightBackVic);
+            rightFrontController = new PIDController(0.1,0.001,0.1,rightEnc,rightFrontVic);
+            targetSpeed = 0;
+            rotateSpeed = 0;
+            targetDist = 0;
+        }
+	
 	public void init() {
 		//Reset Encoders
 		rightEnc.reset();

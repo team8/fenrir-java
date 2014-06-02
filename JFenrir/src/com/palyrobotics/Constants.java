@@ -4,7 +4,7 @@
  * Coded by the 2013-14 Paly Robotics Programming Team
  */
 
-package Robot;
+package com.palyrobotics;
 
 /**
  * Has the constants

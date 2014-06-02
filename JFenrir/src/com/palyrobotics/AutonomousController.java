@@ -3,7 +3,7 @@
  * Coded by the 2013-14 Paly Robotics Programming Team
  */
 
-package Robot;
+package com.palyrobotics;
 
 import edu.wpi.first.wpilibj.*;
 //import Robot.Drivetrain; // Need to use Drivetrain's commands

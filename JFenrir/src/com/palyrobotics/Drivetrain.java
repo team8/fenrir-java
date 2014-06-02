@@ -162,9 +162,9 @@ public class Drivetrain extends Subsystem {
 			super(speed);
 		}
 		
-		public void execute(Drivetrain drivetrain) {
+		public void execute(Subsystem drivetrain) {
 			// Set the speed of the victors to the variable speed
-			drivetrain.setSpeed(arg);
+			((Drivetrain)drivetrain).setSpeed(arg);
 		}
 	}
 	
@@ -174,8 +174,8 @@ public class Drivetrain extends Subsystem {
 			super(speed);
 		}
 		
-		public void execute(Drivetrain drivetrain) {
-			drivetrain.rotateS(arg);
+		public void execute(Subsystem drivetrain) {
+			((Drivetrain)drivetrain).rotateS(arg);
 		}
 	}
 	public static class DriveDistCommand extends DrivetrainCommand {
@@ -184,8 +184,8 @@ public class Drivetrain extends Subsystem {
 			super(dist);
 		}
 		
-		public void execute(Drivetrain drivetrain) {
-			drivetrain.driveDist(arg);
+		public void execute(Subsystem drivetrain) {
+			((Drivetrain)drivetrain).driveDist(arg);
 		}
 	}
 }

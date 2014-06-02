@@ -13,8 +13,6 @@
 hs_err_pid*
 
 # NetBeans specific #
-*/nbproject/*
-*/nbproject/private/
 */build/
 */nbbuild/
 */dist/
@@ -27,7 +25,6 @@ hs_err_pid*
 */.settings/
 */bin/
 *.classpath
-*.project
 */build/
 */resources/
 *.txt

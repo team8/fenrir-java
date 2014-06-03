@@ -126,7 +126,7 @@ public class Shooter extends Subsystem {
     	}
     	
     	void execute(Subsystem shooter){
-    		((Shootershooter).setState(FLUSHING);
+    		((Shooter)shooter).setState(FLUSHING);
     	}
     }
     

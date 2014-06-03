@@ -42,6 +42,6 @@ public abstract class RobotCommand {
 	 * @param subsystem The subsystem that will run the command
 	 */
 	public void execute(Subsystem subsystem) {
-		throw new IllegalArgumentException("The wrong subsystem type was used.");
+
 	}
 }

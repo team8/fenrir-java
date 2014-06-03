@@ -60,6 +60,6 @@ public class Robot {
             case RobotCommand.SHOOTER:
                 command.execute(shooter);
                 break;
-    }
+        }
     }
 }

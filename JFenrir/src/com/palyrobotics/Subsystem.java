@@ -5,8 +5,12 @@ package com.palyrobotics;
  * 
  * @author Tyler Packard
  */
-public abstract class Subsystem {
 
+public abstract class Subsystem {
+	public Subsystem() {
+		
+	}
+	
 	/**
 	 * Initialize the subsystem.
 	 */

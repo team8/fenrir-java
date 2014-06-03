@@ -17,8 +17,14 @@ public class Accumulator extends Subsystem {
 	private Victor accuVic;
 	
 	private int state;
-	public void setState(int state){ this.state = state; }
-	public int getState(){ return state; }
+	
+	public void setState(int state) { 
+		this.state = state; 
+	}
+	
+	public int getState() { 
+		return state; 
+	}
 	
 	private static final int IDLE = 0, ACCUMULATING = 1, PASSING = 2; 
 	
@@ -58,7 +64,7 @@ public class Accumulator extends Subsystem {
 			subsystemType = RobotCommand.ACCUMULATOR;
 		}
 		
-		void execute(Subsystem accu) {
+		public void execute(Subsystem accu) {
 			((Accumulator)accu).setState(ACCUMULATING);
 		}
 	}

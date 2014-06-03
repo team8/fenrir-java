@@ -73,7 +73,7 @@ public class Rangefinder extends Subsystem {
 	    		break;
 	    	case RIGHT:
 	    		rxLeft.set(false);
-			rxRight.set(true);
+	    		rxRight.set(true);
 			if (rightTotal < 10) {
 				double dist = ultraRight.getVoltage() * 104;
 				System.out.println("Right: " + dist);
@@ -86,16 +86,16 @@ public class Rangefinder extends Subsystem {
 	    		break;
 	    	case FINISHED:
 	    		rxLeft.set(false);
-			rxRight.set(false);
-			state = IDLE;
-
-			distInch = (rightAvg + leftAvg) / 2;
-			System.out.println("Average: " + leftAvg + "\n");
-
-			leftAvg = 0;
-			rightAvg = 0;
-			leftTotal = 0;
-			rightTotal = 0;
+				rxRight.set(false);
+				state = IDLE;
+	
+				distInch = (rightAvg + leftAvg) / 2;
+				System.out.println("Average: " + leftAvg + "\n");
+	
+				leftAvg = 0;
+				rightAvg = 0;
+				leftTotal = 0;
+				rightTotal = 0;
 	    		break;
 	    }
 	}

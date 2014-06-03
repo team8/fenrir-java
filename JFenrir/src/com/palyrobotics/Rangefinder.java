@@ -104,7 +104,7 @@ public class Rangefinder extends Subsystem {
     		public FindDistCommand() {
     			subsystemType = RANGEFINDER;
     		}    		
-    		void execute(Subsystem rangefinder) {
+    		public void execute(Subsystem rangefinder) {
     			((Rangefinder)rangefinder).state = LEFT;
     			((Rangefinder)rangefinder).distInch = 0;
     		}

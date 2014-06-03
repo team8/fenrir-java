@@ -105,7 +105,7 @@ public class Shooter extends Subsystem {
     		  subsystemType = RobotCommand.SHOOTER;
     	}
     	
-    	void execute(Subsystem shooter){
+    	public void execute(Subsystem shooter){
     		((Shooter)shooter).setState(EJECTING);
     	}
     }
@@ -115,7 +115,7 @@ public class Shooter extends Subsystem {
     		  subsystemType = RobotCommand.SHOOTER;
     	}
     	
-    	void execute(Subsystem shooter){
+    	public void execute(Subsystem shooter){
     		((Shooter)shooter).setState(IDLE);
     	}
     }
@@ -125,7 +125,7 @@ public class Shooter extends Subsystem {
     		  subsystemType = RobotCommand.SHOOTER;
     	}
     	
-    	void execute(Subsystem shooter){
+    	public void execute(Subsystem shooter){
     		((Shooter)shooter).setState(FLUSHING);
     	}
     }
@@ -135,7 +135,7 @@ public class Shooter extends Subsystem {
     		  subsystemType = RobotCommand.SHOOTER;
     	}
     	
-    	void execute(Subsystem shooter){
+    	public void execute(Subsystem shooter){
     		((Shooter)shooter).shootTimer.reset();
     		((Shooter)shooter).setState(PREPARING);
     	}
@@ -146,7 +146,7 @@ public class Shooter extends Subsystem {
     		  subsystemType = RobotCommand.SHOOTER;
     	}
     	
-    	void execute(Subsystem shooter){
+    	public void execute(Subsystem shooter){
     		((Shooter)shooter).setState(MANUAL_PREPARING);
     	}
     }
@@ -156,7 +156,7 @@ public class Shooter extends Subsystem {
 		 subsystemType = RobotCommand.SHOOTER;
     	}
     	
-    	void execute(Subsystem shooter) {
+    	public void execute(Subsystem shooter) {
     		((Shooter)shooter).setState(MANUAL_FIRING);
     	}
     }

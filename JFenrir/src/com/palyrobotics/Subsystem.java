@@ -8,19 +8,19 @@ package com.palyrobotics;
 
 public abstract class Subsystem {
 	public Subsystem() {
-		
+
 	}
-	
+
 	/**
 	 * Initialize the subsystem.
 	 */
 	public void init() {}
-	
+
 	/**
 	 * Disable the subsystem.
 	 */
 	public void disable() {}
-	
+
 	/**
 	 * Update the subsystem.
 	 */

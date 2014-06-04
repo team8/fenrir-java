@@ -73,7 +73,7 @@ public class HumanController {
 			robot.relayCommand(new Accumulator.SetIdleCommand());
 			robot.relayCommand(new Shooter.SetIdleCommand());
 		}
-		
+
 		/*SHOOTER*/
 		if (getManualButton() && !prevManualButton) {
 			toggleManualState();
@@ -90,18 +90,18 @@ public class HumanController {
 		else if (manualState == true) {
 			System.out.println("is in manual\n");
 			robot.relayCommand(new Shooter.ManualPrepareCommand());
-			
+
 			if (getShootButton()) {
 				robot.relayCommand(new Shooter.ManualFireCommand());
 			}
 			prevZ = false;
 		}
-		
+
 		/*RANGEFINDER*/
 		if (!prevRangeButton && getRangeButton()){
 			robot.relayCommand(new Rangefinder.FindDistCommand());
 		}	
-		
+
 		shootButtonPrev = getShootButton();
 		lastFlushTrigger = getFlushTrigger();
 		prevRangeButton = getRangeButton();
@@ -121,18 +121,18 @@ public class HumanController {
 	private double getAccumulatorStick() {
 		return operatorStick.getY(); // For adjusting the accumulator with Operator stick
 	}
-	
+
 	private double getAccumulator() {
 		//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
 		return operatorStick.getY(); // For testing purposes
 	}
-	
+
 	private boolean getShootButton() {
 		// Get trigger button to shoot from Operator stick
 		// return false;
 		return operatorStick.getRawButton(3);
 	}
-	
+
 	private boolean getFlushTrigger() {
 		//flush out the ball
 		return operatorStick.getRawButton(Constants.FLUSH_TRIGGER);

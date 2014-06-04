@@ -13,17 +13,17 @@ public class JFenrir extends IterativeRobot {
 	 * Robot object
 	 */
 	private Robot robot;
-	
+
 	/**
 	 * HumanController object
 	 */
 	private HumanController humanController;
-	
+
 	/**
 	 * AutonomousController object
 	 */
 	private AutonomousController autoController;
-	
+
 	/**
 	 * Timer object
 	 */

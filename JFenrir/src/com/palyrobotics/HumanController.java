@@ -47,16 +47,18 @@ public class HumanController {
 
 		/*ACCUMULATOR*/
 		if(getAccumulator()<-0.2) {
-			//System.out.print("accumulating\n");
+			System.out.println("accumulating");
 			robot.relayCommand(new Accumulator.AccumulateCommand());
 			prevStop = false;
 		}
 		else if(getAccumulator()>0.2) {
+			System.out.println("passing");
 			robot.relayCommand(new Shooter.EjectCommand());
 			robot.relayCommand(new Accumulator.EjectCommand());
 			prevStop = false;
 		}
 		else {
+			System.out.println("Not accumulating");
 			robot.relayCommand(new Accumulator.SetIdleCommand());
 			if(!prevStop) {
 				robot.relayCommand(new Shooter.SetIdleCommand());
@@ -116,10 +118,6 @@ public class HumanController {
 	private double getAbsTurnStick() {
 		double turn = Math.abs(turnStick.getX());
 		return turn;
-	}
-
-	private double getAccumulatorStick() {
-		return operatorStick.getY(); // For adjusting the accumulator with Operator stick
 	}
 
 	private double getAccumulator() {

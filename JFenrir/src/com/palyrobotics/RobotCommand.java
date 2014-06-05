@@ -1,6 +1,5 @@
 package com.palyrobotics;
 
-import edu.wpi.first.wpilibj.*;
 /**
  * The framework for a command that can be executed.
  * 
@@ -31,7 +30,7 @@ public abstract class RobotCommand {
 		return subsystemType;
 	}
 
-	public void setSubsystemType(int subsytemType) {
+	public void setSubsystemType(int subsystemType) {
 		this.subsystemType = subsystemType;
 	}
 

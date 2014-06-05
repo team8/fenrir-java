@@ -35,11 +35,6 @@ public class Drivetrain extends Subsystem {
 	//Variables for the commands
 	private double targetSpeed;
 	private double rotateSpeed;
-	private double targetDist;
-
-	// For testing what?
-	private double prevLeftDist;
-	private double prevRightDist;
 
 	//Enum for the states
 	private int state;
@@ -61,7 +56,6 @@ public class Drivetrain extends Subsystem {
 		rightFrontController = new PIDController(0.1,0.001,0.1,rightEnc,rightFrontVic);
 		targetSpeed = 0;
 		rotateSpeed = 0;
-		targetDist = 0;
 	}
 
 	public void init() {

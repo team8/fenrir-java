@@ -7,9 +7,6 @@ package com.palyrobotics;
  */
 
 public abstract class Subsystem {
-	public Subsystem() {
-
-	}
 
 	/**
 	 * Initialize the subsystem.

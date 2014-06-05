@@ -3,7 +3,7 @@ package com.palyrobotics;
 import edu.wpi.first.wpilibj.*;
 
 /**
- * Main method?
+ * Main method
  * 
  * @author Neelay Junnarkar
  */
@@ -44,6 +44,7 @@ public class JFenrir extends IterativeRobot {
 	 * @see Robot#init()
 	 */
 	public void robotInit() {
+		System.out.println("robot init");
 		robot.init();
 	}
 
@@ -119,10 +120,10 @@ public class JFenrir extends IterativeRobot {
 	 * Unused
 	 */
 	public void testInit() {
-
+		robot.disable();
 	}
 
 	public void testPeriodic() {
-
+		System.out.println("Testing");
 	}
 }

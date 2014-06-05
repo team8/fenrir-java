@@ -23,7 +23,7 @@ public class Accumulator extends Subsystem {
 	}
 	
 	public int getState() { 
-		return state; 
+		return state;
 	}
 	
 	private static final int IDLE = 0, ACCUMULATING = 1, PASSING = 2; 
@@ -43,19 +43,15 @@ public class Accumulator extends Subsystem {
 	public void update() {
 		switch(state) {
 			case IDLE:
-				setAllVics(0.0);
+				accuVic.set(0.0);
 				break;
 			case ACCUMULATING:
-				accuVic.set(-1.0);
+				accuVic.set(0.0);
 				break;
 			case PASSING:
-				accuVic.set(1.0);
+				accuVic.set(0.0);
 				break;
 		}
-	}
-    
-	private void setAllVics(double spd) {
-		accuVic.set(spd);
 	}
 	
 	public static class AccumulateCommand extends RobotCommand {
@@ -75,8 +71,8 @@ public class Accumulator extends Subsystem {
 			subsystemType = RobotCommand.ACCUMULATOR;
 		}
 		
-		public void execute(Subsystem accu){
-			((Accumulator)accu).setState(ACCUMULATING);
+		public void execute(Subsystem accu) {
+			((Accumulator)accu).setState(PASSING);
 		}
     }
     
@@ -84,8 +80,8 @@ public class Accumulator extends Subsystem {
 		public FlushCommand() {
 			subsystemType  = RobotCommand.ACCUMULATOR;
 		}
-		public void execute(Subsystem accu){
-			((Accumulator)accu).setState(ACCUMULATING);
+		public void execute(Subsystem accu) {
+			((Accumulator)accu).setState(PASSING);
 		}
 	}
 	
@@ -94,8 +90,8 @@ public class Accumulator extends Subsystem {
 		public SetIdleCommand() {
 			subsystemType = RobotCommand.ACCUMULATOR;
 		}
-		public void execute(Subsystem accu){
-			((Accumulator)accu).setState(ACCUMULATING);
+		public void execute(Subsystem accu) {
+			((Accumulator)accu).setState(IDLE);
 		}
 	}
 	
@@ -105,7 +101,7 @@ public class Accumulator extends Subsystem {
 			subsystemType = RobotCommand.ACCUMULATOR;
 		}
 		public void execute(Subsystem accu) {
-			((Accumulator)accu).setState(ACCUMULATING);
+			((Accumulator)accu).setState(PASSING);
 		}
 	}
 }

@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.*;
 public class AutonomousController {
 	
 	private Robot robot;
-	private boolean targetReached;
 	// Distances in inches
 	private double shootDist = 120; // Distance to shoot from
 	private double spawnDist = 218; // Distance from wall when we start

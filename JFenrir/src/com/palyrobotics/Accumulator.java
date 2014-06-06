@@ -46,10 +46,10 @@ public class Accumulator extends Subsystem {
 				accuVic.set(0.0);
 				break;
 			case ACCUMULATING:
-				accuVic.set(0.0);
+				accuVic.set(1.0);
 				break;
 			case PASSING:
-				accuVic.set(0.0);
+				accuVic.set(-1.0);
 				break;
 		}
 	}

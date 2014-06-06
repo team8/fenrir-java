@@ -40,25 +40,27 @@ public class HumanController {
 		/*FULL MOVEMENT*/
 		if(getAbsSpeedStick()>0.1) {
 			robot.relayCommand(new Drivetrain.SetSpeedCommand(speedStick.getY()));
+                        System.out.println("    SPEED STICK");
 		}
 		if(getAbsTurnStick()>0.1) {
 			robot.relayCommand(new Drivetrain.SetRotateCommand(turnStick.getX()));
+                        System.out.println("        TURN STICK");
 		}
 
 		/*ACCUMULATOR*/
 		if(getAccumulator()<-0.2) {
-			System.out.println("accumulating");
 			robot.relayCommand(new Accumulator.AccumulateCommand());
 			prevStop = false;
 		}
 		else if(getAccumulator()>0.2) {
-			System.out.println("passing");
+                        System.out.println("OPERATOR STICK");
+			//System.out.println("passing");
 			robot.relayCommand(new Shooter.EjectCommand());
 			robot.relayCommand(new Accumulator.EjectCommand());
 			prevStop = false;
 		}
 		else {
-			System.out.println("Not accumulating");
+			//System.out.println("Not accumulating");
 			robot.relayCommand(new Accumulator.SetIdleCommand());
 			if(!prevStop) {
 				robot.relayCommand(new Shooter.SetIdleCommand());

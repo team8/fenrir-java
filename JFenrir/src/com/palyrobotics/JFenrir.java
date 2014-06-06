@@ -70,7 +70,7 @@ public class JFenrir extends IterativeRobot {
 	}
 
 	public void autonomousDisabled() {
-
+            
 	}
 
 	/**
@@ -97,6 +97,7 @@ public class JFenrir extends IterativeRobot {
 	 */
 	public void teleopInit() {
 		robot.init();
+                robot.update();
 	}
 
 	/**
@@ -109,11 +110,9 @@ public class JFenrir extends IterativeRobot {
 		robot.update();
 	}
 
-	/**
-	 * Unused
-	 */
 	public void teleopDisabled() {
-
+                robot.disable();
+                robot.update();
 	}
 
 	/**
@@ -121,8 +120,13 @@ public class JFenrir extends IterativeRobot {
 	 */
 	public void testInit() {
 		robot.disable();
+                robot.update();
+                System.out.println("Testing Init");
 	}
 
+        /**
+	 * Unused
+	 */
 	public void testPeriodic() {
 		System.out.println("Testing");
 	}

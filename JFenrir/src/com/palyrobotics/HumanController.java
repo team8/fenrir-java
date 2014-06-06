@@ -48,11 +48,15 @@ public class HumanController {
 		}
 
 		/*ACCUMULATOR*/
-		if(getAccumulator()<-0.2) {
+		if(getAccumulator() > 0.2) {
 			robot.relayCommand(new Accumulator.AccumulateCommand());
 			prevStop = false;
 		}
-		else if(getAccumulator()>0.2) {
+		if (getAccumulator() < -0.2) {
+			robot.relayCommand(new Accumulator.PassCommand());
+			prevStop = false;
+		}
+		else if(getEjectButton()) {
                         System.out.println("OPERATOR STICK");
 			//System.out.println("passing");
 			robot.relayCommand(new Shooter.EjectCommand());
@@ -130,7 +134,7 @@ public class HumanController {
 	private boolean getShootButton() {
 		// Get trigger button to shoot from Operator stick
 		// return false;
-		return operatorStick.getRawButton(3);
+		return operatorStick.getTrigger();
 	}
 
 	private boolean getFlushTrigger() {
@@ -143,6 +147,9 @@ public class HumanController {
 	private boolean getRangeButton() {
 		return operatorStick.getRawButton(4);
 	}	
+	private boolean getEjectButton() {
+		return operatorStick.getRawButton(3);
+	}
 	private void toggleManualState() {
 		manualState = !manualState;
 	}

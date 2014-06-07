@@ -49,11 +49,14 @@ public class HumanController {
 
 		/*ACCUMULATOR*/
 		if(getAccumulator() > 0.2) {
-			robot.relayCommand(new Accumulator.AccumulateCommand());
+                        System.out.println("accu > GREATER.2");
+                        System.out.println(getAccumulator());
+			robot.relayCommand(new Accumulator.PassCommand());
 			prevStop = false;
 		}
 		if (getAccumulator() < -0.2) {
-			robot.relayCommand(new Accumulator.PassCommand());
+                    //System.out.println("accu< LESS-.2");
+			robot.relayCommand(new Accumulator.AccumulateCommand(getAccumulator())); //PassCommand
 			prevStop = false;
 		}
 		else if(getEjectButton()) {
@@ -128,7 +131,7 @@ public class HumanController {
 
 	private double getAccumulator() {
 		//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
-		return operatorStick.getY(); // For testing purposes
+		return operatorStick.getY(); 
 	}
 
 	private boolean getShootButton() {

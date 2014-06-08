@@ -27,7 +27,7 @@ public class Accumulator extends Subsystem {
                 return state;
         }
 
-        private static final int IDLE = 0, ACCUMULATING = 1, PASSING = 2; 
+        private static final int IDLE = 0, ACCUMULATING = 1, EJECTING = 2;
 
         public Accumulator() {
                 accuVic = new Victor(Constants.PORT_ACCUMULATOR_VIC_7);
@@ -44,19 +44,17 @@ public class Accumulator extends Subsystem {
 
         public void update() {
                 //System.out.println("accuVic: "+accuVic.get());
-                System.out.println(state);
+                System.out.println("state: " + state);
                 switch(state) {
-
                         case IDLE:
                                 accuVic.set(0.0);
                                 break;
                         case ACCUMULATING:
                                 accuVic.set(speed);
                                 break;
-                        case PASSING:
-                            System.out.println("PASSING");
-                                accuVic.set(1.0);
-                                break;
+                        case EJECTING:
+                            accuVic.set(1.0);
+                            break;
                 }
         }
 
@@ -73,24 +71,12 @@ public class Accumulator extends Subsystem {
                 }
         }
 
-        public static class PassCommand extends RobotCommand {
-
-               public PassCommand() {
-                        subsystemType  = RobotCommand.ACCUMULATOR;
-                }
-                public void execute(Subsystem accu) {
-                    System.out.println("");
-                        ((Accumulator)accu).setState(PASSING);
-                }
-    }
-
         public static class FlushCommand extends RobotCommand {
                 public FlushCommand() {
                         subsystemType  = RobotCommand.ACCUMULATOR;
                 }
                 public void execute(Subsystem accu) {
-                        ((Accumulator)accu).setState(PASSING);
-                        System.out.println("Accumulator is Passing");
+                        ((Accumulator)accu).setState(EJECTING);
                 }
         }
 
@@ -110,7 +96,7 @@ public class Accumulator extends Subsystem {
                         subsystemType = RobotCommand.ACCUMULATOR;
                 }
                 public void execute(Subsystem accu) {
-                        ((Accumulator)accu).setState(PASSING);
+                        ((Accumulator)accu).setState(EJECTING);
                 }
         }
 }

@@ -48,17 +48,10 @@ public class HumanController {
 		}
 
 		/*ACCUMULATOR*/
-		if(getAccumulator() > 0.2) {
-                        System.out.println("accu > GREATER.2");
-                        System.out.println(getAccumulator());
-			robot.relayCommand(new Accumulator.PassCommand());
-			prevStop = false;
-		}
-		if (getAccumulator() < -0.2) {
-                    //System.out.println("accu< LESS-.2");
-			robot.relayCommand(new Accumulator.AccumulateCommand(getAccumulator())); //PassCommand
-			prevStop = false;
-		}
+                if (getAccumulator() < -0.2 || getAccumulator() > 0.2) {
+                    robot.relayCommand(new Accumulator.AccumulateCommand(getAccumulator()));
+                    prevStop = false;
+                }
 		else if(getEjectButton()) {
                         System.out.println("OPERATOR STICK");
 			//System.out.println("passing");

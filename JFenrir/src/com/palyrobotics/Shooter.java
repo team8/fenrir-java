@@ -1,4 +1,3 @@
-
 /*
  * See JFenrir.java for documentation
  * Coded by the 2013-14 Paly Robotics Programming Team
@@ -7,19 +6,27 @@
 package com.palyrobotics;
 
 import edu.wpi.first.wpilibj.*;
+
 /**
  * Runs the shooter
+ * 
  * @author Neelay Junnarkar
  */
 public class Shooter extends Subsystem {
 
 	private int state;
 
-	public void setState(int state){ this.state = state; }
-	public int getState(){ return state; }
+	public void setState(int state) {
+		this.state = state;
+	}
 
-	//states, replacement for enum
-	private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3, FLUSHING = 4, MANUAL_FIRING = 5, MANUAL_PREPARING = 6;
+	public int getState() {
+		return state;
+	}
+
+	// states, replacement for enum
+	private static final int IDLE = 0, PREPARING = 1, FIRING = 2, EJECTING = 3,
+			FLUSHING = 4, MANUAL_FIRING = 5, MANUAL_PREPARING = 6;
 
 	private Victor shooterVic1;
 	private Victor shooterVic2;
@@ -63,12 +70,12 @@ public class Shooter extends Subsystem {
 			}
 			break;
 		case FIRING:
-			if (shootTimer.get() >= 3.0 && shootTimer.get() < 5.0){
+			if (shootTimer.get() >= 3.0 && shootTimer.get() < 5.0) {
 				loaderVic.set(Constants.LOAD_SPEED);
 			}
-			else if (shootTimer.get() >= 5.0){ 
+			else if (shootTimer.get() >= 5.0) {
 				state = IDLE;
-			}   
+			}
 			break;
 		case EJECTING:
 			loaderVic.set(1);
@@ -101,63 +108,63 @@ public class Shooter extends Subsystem {
 	}
 
 	public static class EjectCommand extends RobotCommand {
-		public EjectCommand(){
-			subsystemType = RobotCommand.SHOOTER;
-		}
-
-		public void execute(Subsystem shooter){
-			((Shooter)shooter).setState(EJECTING);
-		}
-	}
-
-	public static class SetIdleCommand extends RobotCommand {
-		public SetIdleCommand(){
-			subsystemType = RobotCommand.SHOOTER;
-		}
-
-		public void execute(Subsystem shooter){
-			((Shooter)shooter).setState(IDLE);
-		}
-	}
-
-	public static class FlushCommand extends RobotCommand {
-		public FlushCommand(){
-			subsystemType = RobotCommand.SHOOTER;
-		}
-
-		public void execute(Subsystem shooter){
-			((Shooter)shooter).setState(FLUSHING);
-		}
-	}
-
-	public static class FireCommand extends RobotCommand {
-		public FireCommand(){
-			subsystemType = RobotCommand.SHOOTER;
-		}
-
-		public void execute(Subsystem shooter){
-			((Shooter)shooter).shootTimer.reset();
-			((Shooter)shooter).setState(PREPARING);
-		}
-	}
-
-	public static class ManualPrepareCommand extends RobotCommand {
-		public ManualPrepareCommand(){
-			subsystemType = RobotCommand.SHOOTER;
-		}
-
-		public void execute(Subsystem shooter){
-			((Shooter)shooter).setState(MANUAL_PREPARING);
-		}
-	}
-
-	public static class ManualFireCommand extends RobotCommand {
-		public ManualFireCommand(){
+		public EjectCommand() {
 			subsystemType = RobotCommand.SHOOTER;
 		}
 
 		public void execute(Subsystem shooter) {
-			((Shooter)shooter).setState(MANUAL_FIRING);
+			((Shooter) shooter).setState(EJECTING);
+		}
+	}
+
+	public static class SetIdleCommand extends RobotCommand {
+		public SetIdleCommand() {
+			subsystemType = RobotCommand.SHOOTER;
+		}
+
+		public void execute(Subsystem shooter) {
+			((Shooter) shooter).setState(IDLE);
+		}
+	}
+
+	public static class FlushCommand extends RobotCommand {
+		public FlushCommand() {
+			subsystemType = RobotCommand.SHOOTER;
+		}
+
+		public void execute(Subsystem shooter) {
+			((Shooter) shooter).setState(FLUSHING);
+		}
+	}
+
+	public static class FireCommand extends RobotCommand {
+		public FireCommand() {
+			subsystemType = RobotCommand.SHOOTER;
+		}
+
+		public void execute(Subsystem shooter) {
+			((Shooter) shooter).shootTimer.reset();
+			((Shooter) shooter).setState(PREPARING);
+		}
+	}
+
+	public static class ManualPrepareCommand extends RobotCommand {
+		public ManualPrepareCommand() {
+			subsystemType = RobotCommand.SHOOTER;
+		}
+
+		public void execute(Subsystem shooter) {
+			((Shooter) shooter).setState(MANUAL_PREPARING);
+		}
+	}
+
+	public static class ManualFireCommand extends RobotCommand {
+		public ManualFireCommand() {
+			subsystemType = RobotCommand.SHOOTER;
+		}
+
+		public void execute(Subsystem shooter) {
+			((Shooter) shooter).setState(MANUAL_FIRING);
 		}
 	}
 }

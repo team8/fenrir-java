@@ -9,7 +9,7 @@ public class HumanController {
 	private Joystick turnStick;
 	private Joystick operatorStick;
 
-	//booleans used to make sure we don't reissue same command
+	// booleans used to make sure we don't reissue same command
 	private boolean shootButtonPrev;
 	private boolean lastFlushTrigger;
 	private boolean prevRangeButton;
@@ -31,44 +31,45 @@ public class HumanController {
 
 	public void update() {
 
-		/*SLIGHT MOVEMENT*/
-		if(getAbsTurnStick()<=.1 && getAbsSpeedStick()<=.1) {
+		/* SLIGHT MOVEMENT */
+		if (getAbsTurnStick() <= .1 && getAbsSpeedStick() <= .1) {
 			robot.relayCommand(new Drivetrain.SetSpeedCommand(0.0));
 			robot.relayCommand(new Drivetrain.SetRotateCommand(0.0));
 		}
 
-		/*FULL MOVEMENT*/
-		if(getAbsSpeedStick()>0.1) {
+		/* FULL MOVEMENT */
+		if (getAbsSpeedStick() > 0.1) {
 			robot.relayCommand(new Drivetrain.SetSpeedCommand(speedStick.getY()));
-                        System.out.println("    SPEED STICK");
+			System.out.println("    SPEED STICK");
 		}
-		if(getAbsTurnStick()>0.1) {
+		if (getAbsTurnStick() > 0.1) {
 			robot.relayCommand(new Drivetrain.SetRotateCommand(turnStick.getX()));
-                        System.out.println("        TURN STICK");
+			System.out.println("        TURN STICK");
 		}
 
-		/*ACCUMULATOR*/
-                if (getAccumulator() < -0.2 || getAccumulator() > 0.2) {
-                    robot.relayCommand(new Accumulator.AccumulateCommand(getAccumulator()));
-                    prevStop = false;
-                }
-		else if(getEjectButton()) {
-                        System.out.println("OPERATOR STICK");
-			//System.out.println("passing");
+		/* ACCUMULATOR */
+		if (getAccumulator() < -0.2 || getAccumulator() > 0.2) {
+			robot.relayCommand(new Accumulator.AccumulateCommand(
+					getAccumulator()));
+			prevStop = false;
+		}
+		else if (getEjectButton()) {
+			System.out.println("OPERATOR STICK");
+			// System.out.println("passing");
 			robot.relayCommand(new Shooter.EjectCommand());
 			robot.relayCommand(new Accumulator.EjectCommand());
 			prevStop = false;
 		}
 		else {
-			//System.out.println("Not accumulating");
+			// System.out.println("Not accumulating");
 			robot.relayCommand(new Accumulator.SetIdleCommand());
-			if(!prevStop) {
+			if (!prevStop) {
 				robot.relayCommand(new Shooter.SetIdleCommand());
 			}
 			prevStop = true;
 		}
 
-		/*FLUSHING*/
+		/* FLUSHING */
 		if (getFlushTrigger()) {
 			robot.relayCommand(new Accumulator.FlushCommand());
 			robot.relayCommand(new Shooter.FlushCommand());
@@ -78,7 +79,7 @@ public class HumanController {
 			robot.relayCommand(new Shooter.SetIdleCommand());
 		}
 
-		/*SHOOTER*/
+		/* SHOOTER */
 		if (getManualButton() && !prevManualButton) {
 			toggleManualState();
 		}
@@ -101,10 +102,10 @@ public class HumanController {
 			prevZ = false;
 		}
 
-		/*RANGEFINDER*/
-		if (!prevRangeButton && getRangeButton()){
+		/* RANGEFINDER */
+		if (!prevRangeButton && getRangeButton()) {
 			robot.relayCommand(new Rangefinder.FindDistCommand());
-		}	
+		}
 
 		shootButtonPrev = getShootButton();
 		lastFlushTrigger = getFlushTrigger();
@@ -112,7 +113,7 @@ public class HumanController {
 		prevManualButton = getManualButton();
 	}
 
-	private double getAbsSpeedStick(){
+	private double getAbsSpeedStick() {
 		double speed = Math.abs(speedStick.getY());
 		return speed;
 	}
@@ -123,8 +124,9 @@ public class HumanController {
 	}
 
 	private double getAccumulator() {
-		//return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT); // Get button to start accumulator from Operator stick
-		return operatorStick.getY(); 
+		// return operatorStick.GetRawButton((uint32_t)ACCUMULATOR_BUTTON_PORT);
+		// // Get button to start accumulator from Operator stick
+		return operatorStick.getY();
 	}
 
 	private boolean getShootButton() {
@@ -134,18 +136,22 @@ public class HumanController {
 	}
 
 	private boolean getFlushTrigger() {
-		//flush out the ball
+		// flush out the ball
 		return operatorStick.getRawButton(Constants.FLUSH_TRIGGER);
 	}
+
 	private boolean getManualButton() {
 		return operatorStick.getRawButton(5);
 	}
+
 	private boolean getRangeButton() {
 		return operatorStick.getRawButton(4);
-	}	
+	}
+
 	private boolean getEjectButton() {
 		return operatorStick.getRawButton(3);
 	}
+
 	private void toggleManualState() {
 		manualState = !manualState;
 	}

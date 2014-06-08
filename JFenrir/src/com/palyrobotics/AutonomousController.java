@@ -6,6 +6,7 @@
 package com.palyrobotics;
 
 import edu.wpi.first.wpilibj.*;
+
 //import Robot.Drivetrain; // Need to use Drivetrain's commands
 /**
  * Autonomous control
@@ -15,32 +16,33 @@ import edu.wpi.first.wpilibj.*;
  */
 
 public class AutonomousController {
-	
+
 	private Robot robot;
 	// Distances in inches
 	private double shootDist = 120; // Distance to shoot from
 	private double spawnDist = 218; // Distance from wall when we start
-	
+
 	private Timer time = new Timer();
-	
+
 	public AutonomousController(Robot robot) {
 		this.robot = robot;
 		time.stop();
 		time.reset();
 	}
-	
+
 	/**
 	 * The path we want to take during autonomous
 	 */
 	private void path() {
-		robot.relayCommand(new Drivetrain.DriveDistCommand(spawnDist - shootDist));
+		robot.relayCommand(new Drivetrain.DriveDistCommand(spawnDist
+				- shootDist));
 	}
-	
+
 	public void init() {
 		path();
 	}
-	
+
 	public void update() {
-		
+
 	}
 }

@@ -7,6 +7,7 @@ package com.palyrobotics;
 
 /**
  * Runs the robot
+ * 
  * @author Paly Robotics
  */
 public class Robot {
@@ -16,8 +17,7 @@ public class Robot {
 	private Accumulator accumulator = new Accumulator();
 	private Rangefinder rangefinder = new Rangefinder();
 
-
-	public void update(){
+	public void update() {
 		accumulator.update();
 		drivetrain.update();
 		shooter.update();
@@ -31,7 +31,7 @@ public class Robot {
 		rangefinder.init();
 	}
 
-	public void disable(){
+	public void disable() {
 		drivetrain.disable();
 		shooter.disable();
 		accumulator.disable();
@@ -39,14 +39,14 @@ public class Robot {
 	}
 
 	/**
-	 * Lets you run commands on subsystem
-	 * Format:
-	 * robot.relayCommand(new Subsytem.DoStuffCommand(params));
+	 * Lets you run commands on subsystem Format: robot.relayCommand(new
+	 * Subsytem.DoStuffCommand(params));
 	 * 
-	 * @param command Subsystem's command to run
-	 */ 
-	public void relayCommand(RobotCommand command){
-		switch(command.getSubsystemType()) {
+	 * @param command
+	 *            Subsystem's command to run
+	 */
+	public void relayCommand(RobotCommand command) {
+		switch (command.getSubsystemType()) {
 		case RobotCommand.ACCUMULATOR:
 			command.execute(accumulator);
 			break;

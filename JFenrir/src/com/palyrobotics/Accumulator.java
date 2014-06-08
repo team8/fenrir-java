@@ -14,89 +14,93 @@ import edu.wpi.first.wpilibj.*;
  */
 public class Accumulator extends Subsystem {
 
-        private Victor accuVic;
+	private Victor accuVic;
 
-        private int state;
-        private double speed;
+	private int state;
+	private double speed;
 
-        public void setState(int state) { 
-                this.state = state; 
-        }
+	public void setState(int state) {
+		this.state = state;
+	}
 
-        public int getState() { 
-                return state;
-        }
+	public int getState() {
+		return state;
+	}
 
-        private static final int IDLE = 0, ACCUMULATING = 1, EJECTING = 2;
+	private static final int IDLE = 0, ACCUMULATING = 1, EJECTING = 2;
 
-        public Accumulator() {
-                accuVic = new Victor(Constants.PORT_ACCUMULATOR_VIC_7);
-                speed = 0.0;
-        }
+	public Accumulator() {
+		accuVic = new Victor(Constants.PORT_ACCUMULATOR_VIC_7);
+		speed = 0.0;
+	}
 
-        public void init() {
-                state = IDLE;
-        }
+	public void init() {
+		state = IDLE;
+	}
 
-        public void disable() {
-                state = IDLE;
-        }
+	public void disable() {
+		state = IDLE;
+	}
 
-        public void update() {
-                //System.out.println("accuVic: "+accuVic.get());
-                System.out.println("state: " + state);
-                switch(state) {
-                        case IDLE:
-                                accuVic.set(0.0);
-                                break;
-                        case ACCUMULATING:
-                                accuVic.set(speed);
-                                break;
-                        case EJECTING:
-                            accuVic.set(1.0);
-                            break;
-                }
-        }
+	public void update() {
+		// System.out.println("accuVic: "+accuVic.get());
+		System.out.println("eclipse deployed " + state);
+		switch (state) {
+		case IDLE:
+			accuVic.set(0.0);
+			break;
+		case ACCUMULATING:
+			accuVic.set(0.0);
+			break;
+		case EJECTING:
+			accuVic.set(1.0);
+			break;
+		}
+	}
 
-        public static class AccumulateCommand extends RobotCommand {
-                private double arg;
-                public AccumulateCommand(double speed) {
-                        subsystemType = RobotCommand.ACCUMULATOR;
-                        this.arg = speed;
-                }
+	public static class AccumulateCommand extends RobotCommand {
+		private double arg;
 
-                public void execute(Subsystem accu) {
-                        ((Accumulator)accu).speed = arg;
-                        ((Accumulator)accu).setState(ACCUMULATING);
-                }
-        }
+		public AccumulateCommand(double speed) {
+			subsystemType = RobotCommand.ACCUMULATOR;
+			this.arg = speed;
+		}
 
-        public static class FlushCommand extends RobotCommand {
-                public FlushCommand() {
-                        subsystemType  = RobotCommand.ACCUMULATOR;
-                }
-                public void execute(Subsystem accu) {
-                        ((Accumulator)accu).setState(EJECTING);
-                }
-        }
+		public void execute(Subsystem accu) {
+			((Accumulator) accu).speed = arg;
+			((Accumulator) accu).setState(ACCUMULATING);
+		}
+	}
 
-        public static class SetIdleCommand extends RobotCommand {
+	public static class SetIdleCommand extends RobotCommand {
 
-                public SetIdleCommand() {
-                        subsystemType = RobotCommand.ACCUMULATOR;
-                }
-                public void execute(Subsystem accu) {
-                        ((Accumulator)accu).setState(IDLE);
-                }
-        }
+		public SetIdleCommand() {
+			subsystemType = RobotCommand.ACCUMULATOR;
+		}
 
-        public static class EjectCommand extends RobotCommand {
+		public void execute(Subsystem accu) {
+			((Accumulator) accu).setState(IDLE);
+		}
+	}
 
-                public EjectCommand() {
-                        subsystemType = RobotCommand.ACCUMULATOR;
-                }
-                public void execute(Subsystem accu) {
-                        ((Accumulator)accu).setState(EJECTING);
-                }
-        }
+	public static class EjectCommand extends RobotCommand {
+
+		public EjectCommand() {
+			subsystemType = RobotCommand.ACCUMULATOR;
+		}
+
+		public void execute(Subsystem accu) {
+			((Accumulator) accu).setState(EJECTING);
+		}
+	}
+	
+	public static class FlushCommand extends RobotCommand {
+		public FlushCommand() {
+			subsystemType = RobotCommand.ACCUMULATOR;
+		}
+
+		public void execute(Subsystem accu) {
+			((Accumulator) accu).setState(EJECTING);
+		}
+	}
 }

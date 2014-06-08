@@ -9,14 +9,19 @@ import edu.wpi.first.wpilibj.*;
 
 /**
  * Runs the rangefinder
+ * 
  * @author Tyler Packard
  */
 public class Rangefinder extends Subsystem {
 
-	private AnalogChannel ultraLeft = new AnalogChannel(Constants.ULTRASONIC_CHANNEL_LEFT);
-	private DigitalOutput rxLeft = new DigitalOutput(Constants.ULTRASONIC_RX_LEFT);
-	private AnalogChannel ultraRight = new AnalogChannel(Constants.ULTRASONIC_CHANNEL_RIGHT);
-	private DigitalOutput rxRight = new DigitalOutput(Constants.ULTRASONIC_RX_RIGHT);
+	private AnalogChannel ultraLeft = new AnalogChannel(
+			Constants.ULTRASONIC_CHANNEL_LEFT);
+	private DigitalOutput rxLeft = new DigitalOutput(
+			Constants.ULTRASONIC_RX_LEFT);
+	private AnalogChannel ultraRight = new AnalogChannel(
+			Constants.ULTRASONIC_CHANNEL_RIGHT);
+	private DigitalOutput rxRight = new DigitalOutput(
+			Constants.ULTRASONIC_RX_RIGHT);
 
 	private static final int IDLE = 0;
 	private static final int LEFT = 1;
@@ -29,7 +34,6 @@ public class Rangefinder extends Subsystem {
 	private double rightAvg = 0;
 	private int leftTotal = 0;
 	private int rightTotal = 0;
-
 
 	public double measureAngle() {
 		// Probably obsolete
@@ -67,7 +71,8 @@ public class Rangefinder extends Subsystem {
 				System.out.println("Left: " + dist);
 				leftAvg += dist;
 				leftTotal++;
-			} else {
+			}
+			else {
 				leftAvg /= leftTotal;
 				state = RIGHT;
 			}
@@ -80,7 +85,8 @@ public class Rangefinder extends Subsystem {
 				System.out.println("Right: " + dist);
 				rightAvg += dist;
 				rightTotal++;
-			} else {
+			}
+			else {
 				rightAvg /= rightTotal;
 				state = FINISHED;
 			}
@@ -104,10 +110,11 @@ public class Rangefinder extends Subsystem {
 	public static class FindDistCommand extends RobotCommand {
 		public FindDistCommand() {
 			subsystemType = RANGEFINDER;
-		}    		
+		}
+
 		public void execute(Subsystem rangefinder) {
-			((Rangefinder)rangefinder).state = LEFT;
-			((Rangefinder)rangefinder).distInch = 0;
+			((Rangefinder) rangefinder).state = LEFT;
+			((Rangefinder) rangefinder).distInch = 0;
 		}
 	}
 }

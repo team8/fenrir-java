@@ -41,6 +41,7 @@ public class JFenrir extends IterativeRobot {
 
 	/**
 	 * Initializes robot
+	 * 
 	 * @see Robot#init()
 	 */
 	public void robotInit() {
@@ -50,7 +51,8 @@ public class JFenrir extends IterativeRobot {
 
 	/**
 	 * Initializes robot for autonomous
-	 * @see Robot#init() 
+	 * 
+	 * @see Robot#init()
 	 * @see AutonomousController#init()
 	 */
 	public void autonomousInit() {
@@ -61,8 +63,9 @@ public class JFenrir extends IterativeRobot {
 
 	/**
 	 * Updates the autoController and robot
+	 * 
 	 * @see AutonomousController#update()
-	 * @see Robot#update() 
+	 * @see Robot#update()
 	 */
 	public void autonomousPeriodic() {
 		autoController.update();
@@ -70,12 +73,13 @@ public class JFenrir extends IterativeRobot {
 	}
 
 	public void autonomousDisabled() {
-            
+
 	}
 
 	/**
 	 * Disables the robot
-	 * @see Robot#disable() 
+	 * 
+	 * @see Robot#disable()
 	 */
 	public void disabledInit() {
 		robot.disable();
@@ -83,7 +87,8 @@ public class JFenrir extends IterativeRobot {
 
 	/**
 	 * Disables the robot for periodic
-	 * @see Robot#disable() 
+	 * 
+	 * @see Robot#disable()
 	 * @see Robot#update()
 	 */
 	public void disabledPeriodic() {
@@ -93,15 +98,17 @@ public class JFenrir extends IterativeRobot {
 
 	/**
 	 * Initializes the robot for teleop
+	 * 
 	 * @see Robot#init()
 	 */
 	public void teleopInit() {
 		robot.init();
-                robot.update();
+		robot.update();
 	}
 
 	/**
 	 * Updates for teleop
+	 * 
 	 * @see HumanController#update()
 	 * @see Robot#update()
 	 */
@@ -111,8 +118,8 @@ public class JFenrir extends IterativeRobot {
 	}
 
 	public void teleopDisabled() {
-                robot.disable();
-                robot.update();
+		robot.disable();
+		robot.update();
 	}
 
 	/**
@@ -120,11 +127,11 @@ public class JFenrir extends IterativeRobot {
 	 */
 	public void testInit() {
 		robot.disable();
-                robot.update();
-                System.out.println("Testing Init");
+		robot.update();
+		System.out.println("Testing Init");
 	}
 
-        /**
+	/**
 	 * Unused
 	 */
 	public void testPeriodic() {

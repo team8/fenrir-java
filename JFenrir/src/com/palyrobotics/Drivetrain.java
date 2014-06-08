@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.*;
 
 /**
  * Runs the drivetrain
- *
+ * 
  * @author Nihar Mitra
  * @author Neelay Junnarkar
  * @author Benjamin Cohen-Wang
@@ -23,7 +23,7 @@ public class Drivetrain extends Subsystem {
 	private Victor rightFrontVic;
 	private Victor rightBackVic;
 
-	//Encoders and PID Controllers
+	// Encoders and PID Controllers
 	private Encoder leftEnc;
 	private Encoder rightEnc;
 
@@ -32,40 +32,46 @@ public class Drivetrain extends Subsystem {
 	private PIDController leftBackController;
 	private PIDController rightBackController;
 
-	//Variables for the commands
+	// Variables for the commands
 	private double targetSpeed;
 	private double rotateSpeed;
 
-	//Enum for the states
+	// Enum for the states
 	private int state;
 	public final static int IDLE = 0;
 	public final static int AUTO_DRIVING = 1;
 	public final static int TELE_DRIVING = 2;
 	public final static int DRIVE_DIST = 3;
 
-	public Drivetrain(){
-		leftEnc = new Encoder(Constants.PORT_ENCODER_LEFT_A, Constants.PORT_ENCODER_LEFT_B);
-		rightEnc = new Encoder(Constants.PORT_ENCODER_RIGHT_A, Constants.PORT_ENCODER_RIGHT_B);
+	public Drivetrain() {
+		leftEnc = new Encoder(Constants.PORT_ENCODER_LEFT_A,
+				Constants.PORT_ENCODER_LEFT_B);
+		rightEnc = new Encoder(Constants.PORT_ENCODER_RIGHT_A,
+				Constants.PORT_ENCODER_RIGHT_B);
 		leftFrontVic = new Victor(Constants.PORT_DRIVE_VIC_LEFT_FRONT);
 		leftBackVic = new Victor(Constants.PORT_DRIVE_VIC_LEFT_BACK);
 		rightFrontVic = new Victor(Constants.PORT_DRIVE_VIC_RIGHT_FRONT);
 		rightBackVic = new Victor(Constants.PORT_DRIVE_VIC_RIGHT_BACK);
-		leftFrontController = new PIDController(0.1,0.001,0.1,leftEnc,leftFrontVic);
-		leftBackController = new PIDController(0.1,0.001,0.1,leftEnc,leftBackVic);
-		rightBackController = new PIDController(0.1,0.001,0.1,rightEnc,rightBackVic);
-		rightFrontController = new PIDController(0.1,0.001,0.1,rightEnc,rightFrontVic);
+		leftFrontController = new PIDController(0.1, 0.001, 0.1, leftEnc,
+				leftFrontVic);
+		leftBackController = new PIDController(0.1, 0.001, 0.1, leftEnc,
+				leftBackVic);
+		rightBackController = new PIDController(0.1, 0.001, 0.1, rightEnc,
+				rightBackVic);
+		rightFrontController = new PIDController(0.1, 0.001, 0.1, rightEnc,
+				rightFrontVic);
 		targetSpeed = 0;
 		rotateSpeed = 0;
 	}
 
 	public void init() {
-		//Reset Encoders
+		// Reset Encoders
 		rightEnc.reset();
 		leftEnc.reset();
 		rightEnc.start();
 		leftEnc.start();
-		/*circumference of wheel= 19 inches*/
-				//Calibrate encoders
+		/* circumference of wheel= 19 inches */
+		// Calibrate encoders
 		rightFrontController.setOutputRange(-1, 1);
 		leftFrontController.setOutputRange(-1, 1);
 		rightBackController.setOutputRange(-1, 1);
@@ -85,8 +91,10 @@ public class Drivetrain extends Subsystem {
 	public void update() {
 		switch (state) {
 		case TELE_DRIVING:
-			double leftSpeed = Math.min(Math.max(-(targetSpeed + rotateSpeed), -1), 1);
-			double rightSpeed = Math.min(Math.max(targetSpeed - rotateSpeed, -1), 1);
+			double leftSpeed = Math.min(
+					Math.max(-(targetSpeed + rotateSpeed), -1), 1);
+			double rightSpeed = Math.min(
+					Math.max(targetSpeed - rotateSpeed, -1), 1);
 			leftFrontVic.set(leftSpeed);
 			leftBackVic.set(leftSpeed);
 			rightFrontVic.set(rightSpeed);
@@ -158,7 +166,7 @@ public class Drivetrain extends Subsystem {
 
 		public void execute(Subsystem drivetrain) {
 			// Set the speed of the victors to the variable speed
-			((Drivetrain)drivetrain).setSpeed(arg);
+			((Drivetrain) drivetrain).setSpeed(arg);
 		}
 	}
 
@@ -169,9 +177,10 @@ public class Drivetrain extends Subsystem {
 		}
 
 		public void execute(Subsystem drivetrain) {
-			((Drivetrain)drivetrain).rotateS(arg);
+			((Drivetrain) drivetrain).rotateS(arg);
 		}
 	}
+
 	public static class DriveDistCommand extends DrivetrainCommand {
 
 		public DriveDistCommand(double dist) {
@@ -179,7 +188,7 @@ public class Drivetrain extends Subsystem {
 		}
 
 		public void execute(Subsystem drivetrain) {
-			((Drivetrain)drivetrain).driveDist(arg);
+			((Drivetrain) drivetrain).driveDist(arg);
 		}
 	}
 }

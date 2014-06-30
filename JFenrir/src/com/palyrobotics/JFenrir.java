@@ -3,35 +3,17 @@ package com.palyrobotics;
 import edu.wpi.first.wpilibj.*;
 
 /**
- * Main method
+ * "Main" method
  * 
  * @author Neelay Junnarkar
  */
 public class JFenrir extends IterativeRobot {
 
-	/**
-	 * Robot object
-	 */
 	private Robot robot;
-
-	/**
-	 * HumanController object
-	 */
 	private HumanController humanController;
-
-	/**
-	 * AutonomousController object
-	 */
 	private AutonomousController autoController;
-
-	/**
-	 * Timer object
-	 */
 	private Timer timer;
 
-	/**
-	 * JFenrir object
-	 */
 	public JFenrir() {
 		robot = new Robot();
 		humanController = new HumanController(robot);
@@ -40,7 +22,7 @@ public class JFenrir extends IterativeRobot {
 	}
 
 	/**
-	 * Initializes robot
+	 * Initializes robot at power on
 	 * 
 	 * @see Robot#init()
 	 */
@@ -50,9 +32,8 @@ public class JFenrir extends IterativeRobot {
 	}
 
 	/**
-	 * Initializes robot for autonomous
+	 * Initializes robot when you enter autonomous mode
 	 * 
-	 * @see Robot#init()
 	 * @see AutonomousController#init()
 	 */
 	public void autonomousInit() {
@@ -62,7 +43,7 @@ public class JFenrir extends IterativeRobot {
 	}
 
 	/**
-	 * Updates the autoController and robot
+	 * Iteratively calls the autoController and robot at 50Hz "slow loop"
 	 * 
 	 * @see AutonomousController#update()
 	 * @see Robot#update()

@@ -84,7 +84,6 @@
             <compilation-unit>
                 <package-root>src</package-root>
                 <classpath mode="boot">${sunspot.bootclasspath}</classpath>
-                <classpath mode="compile">${wpilibj.home}/classes.jar;C:\Users\EngTechP7\Documents\Sunspot FRC SDK .jar\networktables-crio.jar;C:\Users\EngTechP7\Documents\Sunspot FRC SDK .jar\squawk.jar;C:\Users\EngTechP7\Documents\Sunspot FRC SDK .jar\wpilibj.jar</classpath>
                 <built-to>build</built-to>
                 <source-level>1.4</source-level>
             </compilation-unit>

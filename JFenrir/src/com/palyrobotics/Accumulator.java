@@ -44,7 +44,7 @@ public class Accumulator extends Subsystem {
 
 	public void update() {
 		// System.out.println("accuVic: "+accuVic.get());
-		System.out.println("eclipse deployed " + state);
+		System.out.println("Netbeans deployed " + state);
 		switch (state) {
 		case IDLE:
 			accuVic.set(0.0);
